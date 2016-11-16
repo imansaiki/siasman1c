@@ -7,8 +7,9 @@
 
 <body>
 <form method="post" action="<?php base_url('Akun/login')?>" >
-	<input type="text" />
-	<input type="password" />
+	id :<input name="id" type="text" /></br>
+	pass :<input name="password" type="password" /></br>
+	<input type="submit" value="Login">
 </form>
 </body>
 
