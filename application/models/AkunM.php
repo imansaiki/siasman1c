@@ -1,5 +1,5 @@
 <?php
-class Akun extends CI_Model{
+class AkunM extends CI_Model{
 	function login($data){
 		//cleaning query from XSS
 		$id = $this->security->xss_clean($data['id']);
