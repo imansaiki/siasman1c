@@ -7,5 +7,17 @@ class Akun extends CI_Controller {
 			$this->load->view('welcome_message');
 		}
 	}
+	function  login(){
+		$login_s= array(
+				'id'=>$this->input->post('id'),
+				'password'=>$this->input->post('password')
+		);
+		$this->load->model('Akunm');
+		$login_r=$this->Akunm->login($login_s);
+		foreach ($login_r as $row){
+			echo $row->id;
+			echo $row->password;
+		}
+	}
 
 }
