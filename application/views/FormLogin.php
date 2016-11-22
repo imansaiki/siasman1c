@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<form method="post" action="<?php base_url('Akun/login')?>" >
+<form method="post" action="<?php echo base_url('Akun/login');?>" >
 	id :<input name="id" type="text" /></br>
 	pass :<input name="password" type="password" /></br>
 	<input type="submit" value="Login">

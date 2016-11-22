@@ -9,9 +9,8 @@ class AkunM extends CI_Model{
 		$password = $this->db->escape_str($password);
 		//set query
 		$this->db->flush_cache();
-		$this->db->where('id',$id);
-		$this->db->where('password',$password);
-		$this->db->from('Siswa');
+		$this->db->where($data);
+		$this->db->from('Akun');
 		//execute query
 		$query = $this->db->get();
 		return $query->result();
