@@ -3,20 +3,17 @@
 
 <!-- Formlogin -->
 	<div id="page-wrapper">
+		<div class="container-fluid">
 		<?php 
-			$message=$this->session->flashdata('alert');
+			$message=$this->session->flashdata('message');
 			if (!empty($message)){
 				echo '	<div style="padding-top: 10px;">
-    					<div class="alert alert-danger" role="alert">
 						'.$message.'
-						<a href="#" class="alert-link">...</a>
-						</div>
 						</div>';
 			}else{
 				echo '<div style="padding-top: 81px;"></div>';
 			}
 		?>
-		<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="panel panel-info" >
@@ -31,6 +28,7 @@
 							<span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
 							<input class="form-control" placeholder="password" name="password" type="password" />
 						</div>
+							<input type=hidden name="submit" value=TRUE>
 							<button type="submit" class="form-control btn-primary"><i class="fa fa-chevron-right "></i> Login</button>
 					</form>
 				</div>

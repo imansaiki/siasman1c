@@ -12,19 +12,19 @@
     <title>SIASMAN1C</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="assets/css/metisMenu.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/css/sb-admin-2.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="assets/css/morris.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url();?>assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,13 +50,13 @@
                 <li class="dropdown">
                 <?php if (!empty($this->session->userdata('id'))){?>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    	<?php echo $this->session->userdata('id');?>
+                    	<?php echo $this->session->userdata('id_name');?>
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="#"><i class="fa fa-address-card-o fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="<?php echo base_url('akun/editPassword');?>"><i class="fa fa-key fa-fw"></i> Ganti Password</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url('akun/logout');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -64,8 +64,7 @@
                     </ul>
 				<?php }else{?>
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    	<?php echo $this->session->userdata('id');?>
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-sign-in fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
 						<div class="panel panel-info" >
@@ -80,6 +79,7 @@
 											<span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
 											<input class="form-control" placeholder="password" name="password" type="password" />
 										</div>
+										<input type="hidden" name="submit" value=TRUE />
 										<button type="submit" class="form-control btn-primary"><i class="fa fa-chevron-right "></i> Login</button>
 									</form>
 								</div>
