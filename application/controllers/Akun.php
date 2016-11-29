@@ -169,5 +169,11 @@ class Akun extends CI_Controller {
 			}
 		}
 	}
+	function daftarAkun(){
+		$this->load->view('head');
+		$this->load->view('DaftarAkun');
+		$this->load->view('foot');
+	}
+
 
 }

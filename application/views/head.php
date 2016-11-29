@@ -22,6 +22,7 @@
 
     <!-- Morris Charts CSS -->
     <link href="<?php echo base_url();?>assets/css/morris.css" rel="stylesheet">
+    
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
