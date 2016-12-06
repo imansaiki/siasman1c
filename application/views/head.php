@@ -37,6 +37,10 @@
     <![endif]-->
 
 </head>
+
+<div id="site-header" style="background-image: url('<?php echo base_url();?>assets/img/sman1ccc.png?>')"> 
+</div>
+
 <div id="wrapper">
 	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
