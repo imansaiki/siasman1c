@@ -23,8 +23,7 @@
     <!-- Morris Charts CSS -->
     <link href="<?php echo base_url();?>assets/css/morris.css" rel="stylesheet">
 
-	<!-- Custom CSS -->
-    <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet">    
+	    
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -110,7 +109,7 @@
                     	if (!empty($this->session->userdata('id'))){ 
                     ?>
                     	<li>
-							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Nilai<span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-tasks fa-fw"></i> Nilai<span class="fa arrow"></span></a>
 							
 							<!-- navbar-sidebar-lv2 -->
 							<ul class="nav nav-second-level">
@@ -125,22 +124,22 @@
 							
                         </li>
                         <li>
-							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Data<span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-users fa-fw"></i> Data<span class="fa arrow"></span></a>
 							
 							<!-- navbar-sidebar-lv2 -->
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="flot.html">Siswa</a>
+									<a href="<?php echo base_url('siswa')?>">Siswa</a>
 								</li>
 								<li>
-									<a href="morris.html">Guru</a>
+									<a href="<?php echo base_url('guru')?>">Guru</a>
 								</li>
 							</ul>
 							<!-- /.navbar-sidebar-lv2 -->
 							
                         </li>
                         <li>
-							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Jadwal<span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-calendar fa-fw"></i> Jadwal<span class="fa arrow"></span></a>
 							
 							<!-- navbar-sidebar-lv2 -->
 							<ul class="nav nav-second-level">
@@ -154,7 +153,9 @@
 							<!-- /.navbar-sidebar-lv2 -->
 							
                         </li>
-                       
+                       <li>
+							<a href="<?php echo base_url('Akun/editPassword')?>"><i class="fa fa-unlock-alt fa-fw"></i> Ganti password</a>
+						</li>
                     <?php }?>
                     </ul>    
                 </div>
