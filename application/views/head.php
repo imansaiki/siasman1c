@@ -22,7 +22,9 @@
 
     <!-- Morris Charts CSS -->
     <link href="<?php echo base_url();?>assets/css/morris.css" rel="stylesheet">
-    
+
+	<!-- Custom CSS -->
+    <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet">    
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -98,37 +100,57 @@
 						<li>
 							<a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 						</li>
-						<li>
-							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+						
+                    <?php 
+                    	$level=$this->session->userdata('level');
+                    	if (!empty($this->session->userdata('id'))){ 
+                    ?>
+                    	<li>
+							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Nilai<span class="fa arrow"></span></a>
 							
 							<!-- navbar-sidebar-lv2 -->
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="flot.html">Flot Charts</a>
+									<a href="flot.html">Input</a>
 								</li>
 								<li>
-									<a href="morris.html">Morris.js Charts</a>
+									<a href="morris.html">Lihat nilai</a>
 								</li>
 							</ul>
 							<!-- /.navbar-sidebar-lv2 -->
 							
                         </li>
-                    <?php if (!empty($this->session->userdata('id'))){ ?>
-                    <li>
-							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                        <li>
+							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Data<span class="fa arrow"></span></a>
 							
 							<!-- navbar-sidebar-lv2 -->
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="flot.html">Flot Charts</a>
+									<a href="flot.html">Siswa</a>
 								</li>
 								<li>
-									<a href="morris.html">Morris.js Charts</a>
+									<a href="morris.html">Guru</a>
 								</li>
 							</ul>
 							<!-- /.navbar-sidebar-lv2 -->
 							
                         </li>
+                        <li>
+							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Jadwal<span class="fa arrow"></span></a>
+							
+							<!-- navbar-sidebar-lv2 -->
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="flot.html">Input jadwal</a>
+								</li>
+								<li>
+									<a href="morris.html">Lihat jadwal</a>
+								</li>
+							</ul>
+							<!-- /.navbar-sidebar-lv2 -->
+							
+                        </li>
+                       
                     <?php }?>
                     </ul>    
                 </div>
