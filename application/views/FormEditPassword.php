@@ -18,21 +18,21 @@
 				
 					<form method="post" action="<?php echo base_url('Akun/editPassword');?>" >
 						<div class="form-group">
-							<label for="exampleInputEmail1">Password Lama</label>
+							<label>Password Lama</label>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1"><i class="fa fa-user "></i></span>
 								<input class="form-control" placeholder="nip / nis"  name="oldpassword" type="password" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Password Baru</label>
+							<label>Password Baru</label>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
 								<input class="form-control" placeholder="password" name="newpassword" type="password" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Konfirmasi Password Baru</label>
+							<label>Konfirmasi Password Baru</label>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
 								<input class="form-control" placeholder="password" name="newpasswordconfirm" type="password" />
