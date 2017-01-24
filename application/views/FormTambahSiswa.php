@@ -13,7 +13,7 @@
 					echo $message;
 				}
 			?>
-			<form class="form-horizontal" action="">
+			<form class="form-horizontal" action="<?php echo base_url('siswa/tambahsiswa');?>" method="post">
 				<div class="form-group">
 					<label class="control-label col-md-1" for="nis">NIS</label>
 					<div class="col-md-11" >
@@ -27,25 +27,25 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="tempatlahir">Tempat Lahir</label>
+					<label class="control-label col-md-1" for="tmptlahir">Tempat Lahir</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Tempat Lahir"  name="tempatlahir" type="text" />
+						<input class="form-control" placeholder="Tempat Lahir"  name="tmptlahir" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="tanggallahir">Tanggal Lahir</label>
+					<label class="control-label col-md-1" for="tgllahir">Tanggal Lahir</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Tanggal Lahir"  name="tanggallahir" type="text" />
+						<input class="form-control" placeholder="Tanggal Lahir"  name="tgllahir" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="jeniskelamin">Jenis Kelamin</label>
+					<label class="control-label col-md-1" for="jkelamin">Jenis Kelamin</label>
 					<div class="col-md-11" >
 						<div class="radio">
-  							<label><input type="radio" name="jeniskelamin" value="Pria">Pria</label>
+  							<label><input type="radio" name="jkelamin" value="Pria">Pria</label>
 						</div>
 						<div class="radio">
-  							<label><input type="radio" name="jeniskelamin" value="Wanita">Wanita</label>
+  							<label><input type="radio" name="jkelamin" value="Wanita">Wanita</label>
 						</div>
 					</div>
 				</div>
@@ -62,15 +62,68 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="namaayah">Nama Ayah</label>
+					<label class="control-label col-md-1" for="nayah">Nama Ayah</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Nama Ayah"  name="namaayah" type="text" />
+						<input class="form-control" placeholder="Nama Ayah"  name="nayah" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="namaibu">Nama Ibu</label>
+					<label class="control-label col-md-1" for="nibu">Nama Ibu</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Nama Ibu"  name="namaibu" type="text" />
+						<input class="form-control" placeholder="Nama Ibu"  name="nibu" type="text" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="pdayah">Pendidikan Ayah</label>
+					<div class="col-md-11" >
+						<input class="form-control" placeholder="Pendidikan Ayah"  name="pdayah" type="text" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="pdibu">Pendidikan Ibu</label>
+					<div class="col-md-11" >
+						<input class="form-control" placeholder="Pendidikan Ibu"  name="pdibu" type="text" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="pkayah">Pekerjaan Ayah</label>
+					<div class="col-md-11" >
+						<input class="form-control" placeholder="Pekerjaan Ayah"  name="pkayah" type="text" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="pkibu">Pekerjaan Ibu</label>
+					<div class="col-md-11" >
+						<input class="form-control" placeholder="Pekerjaan Ibu"  name="pkibu" type="text" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="asekolah">Asal Sekolah</label>
+					<div class="col-md-11" >
+						<input class="form-control" placeholder="Asal Sekolah"  name="asekolah" type="text" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="thnmasuk">Tahun Masuk</label>
+					<div class="col-md-11" >
+						<input class="form-control" placeholder="Tahun Masuk"  name="thnmasuk" type="text" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="kwnegara">Kewarganegaraan</label>
+					<div class="col-md-11" >
+						<div class="radio">
+  							<label><input type="radio" name="kwnegara" value="WNI">WNI</label>
+						</div>
+						<div class="radio">
+  							<label><input type="radio" name="kwnegara" value="WNA">WNA</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-2 col-md-offset-1">
+						<input type="hidden" value="submit" name="submit">
+						<input type="submit" value="kirim" class="form-control btn-primary">
 					</div>
 				</div>
 			</form>

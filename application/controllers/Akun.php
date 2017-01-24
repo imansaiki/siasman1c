@@ -38,7 +38,7 @@ class Akun extends CI_Controller {
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">'
 														.validation_errors().
 														'</div>');
-				redirect('akun');
+				redirect(base_url('akun'));
 			}else{
 				$login_s= array(
 						'id'=>$this->input->post('id'),

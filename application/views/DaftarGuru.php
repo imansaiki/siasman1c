@@ -17,7 +17,7 @@
 			<div class="row">
 				
 					<div class="form-group">
-						<a  href=<?php echo base_url('Siswa/tambahSiswa');?>><i class="fa fa-plus "></i> <b>Tambah Siswa</b></a>
+						<a  href=<?php echo base_url('Guru/tambahGuru');?>><i class="fa fa-plus "></i> <b>Tambah Guru</b></a>
 					</div>
 				
 			</div>
@@ -186,7 +186,7 @@
 <!-- /.Tabel akun -->
 <!-- jQuery -->
 
-<script src="<?php echo base_url();?>assets/js/jquery-3.1.1.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 
