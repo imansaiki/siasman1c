@@ -8,9 +8,8 @@
 				</div>
 			</div>
 			<?php 
-				$message=$this->session->flashdata('message');
-				if (!empty($message)){
-					echo $message;
+				if($this->session->flashdata('message')){
+					echo $this->session->flashdata('message');
 				}
 			?>
 			<form class="form-horizontal" action="<?php echo base_url('guru/tambahguru');?>" method="post">

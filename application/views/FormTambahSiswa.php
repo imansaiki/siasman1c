@@ -1,5 +1,5 @@
 <body>
-<!-- Form tambah akun -->
+<!-- Form tambah siswa -->
 	<div id="page-wrapper">
 		<div class="container-fluid">
 			<div class="row">
@@ -8,16 +8,15 @@
 				</div>
 			</div>
 			<?php 
-				$message=$this->session->flashdata('message');
-				if (!empty($message)){
-					echo $message;
+				if($this->session->flashdata('message')){
+					echo $this->session->flashdata('message');
 				}
 			?>
-			<form class="form-horizontal" action="<?php echo base_url('siswa/tambahsiswa');?>" method="post">
+			<form class="form-horizontal" action="<?php echo base_url('Siswa/tambahSiswa');?>" method="post">
 				<div class="form-group">
 					<label class="control-label col-md-1" for="nis">NIS</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="nis"  name="nis" type="text" />
+						<input <?php if ($this->session->flashdata('nis'))?> class="form-control" placeholder="nis" value="<?php { echo $this->session->flashdata('nis'); }?>" placeholder="nis" name="nis" type="text" required />
 					</div>
 				</div>
 				<div class="form-group">
@@ -106,7 +105,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-1" for="thnmasuk">Tahun Masuk</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Tahun Masuk"  name="thnmasuk" type="text" />
+						<input <?php if ($this->session->flashdata('thn_masuk'))?> class="form-control" value="<?php { echo $this->session->flashdata('thn_masuk'); }?>" placeholder="Tahun Masuk" name="thnmasuk" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -123,10 +122,15 @@
 				<div class="form-group">
 					<div class="col-md-2 col-md-offset-1">
 						<input type="hidden" value="submit" name="submit">
-						<input type="submit" value="kirim" class="form-control btn-primary">
+						<button type="submit" id="submit" class="form-control btn-primary"><i class="fa fa-plus "></i> Tambah Siswa</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </body>
+<script>
+  $('#submit').on('click', function () {
+    $(this).button('loading')
+  })
+</script>

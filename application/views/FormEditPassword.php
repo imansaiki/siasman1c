@@ -9,9 +9,8 @@
 				</div>
 			</div>
 			<?php 
-				$message=$this->session->flashdata('message');
-				if (!empty($message)){
-					echo $message;
+				if($this->session->flashdata('message')){
+					echo $this->session->flashdata('message');
 				}
 			?>
 			<div class="row">

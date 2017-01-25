@@ -5,11 +5,8 @@
 	<div id="page-wrapper">
 		<div class="container-fluid">
 		<?php 
-			$message=$this->session->flashdata('message');
-			if (!empty($message)){
-				echo '	<div style="padding-top: 10px;">
-						'.$message.'
-						</div>';
+			if($this->session->flashdata('message')){
+				echo $this->session->flashdata('message');
 			}else{
 				echo '<div style="padding-top: 81px;"></div>';
 			}
@@ -29,7 +26,7 @@
 							<input class="form-control" placeholder="password" name="password" type="password" />
 						</div>
 							<input type=hidden name="submit" value=TRUE>
-							<button type="submit" class="form-control btn-primary"><i class="fa fa-chevron-right "></i> Login</button>
+							<button type="submit" id="submit" class="form-control btn-primary"><i class="fa fa-chevron-right "></i> Login</button>
 					</form>
 				</div>
 				</div>
@@ -41,3 +38,8 @@
 
 </body>
 
+<script>
+  $('#submit').on('click', function () {
+    $(this).button('loading')
+  })
+</script>

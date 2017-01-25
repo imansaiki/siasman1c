@@ -23,7 +23,7 @@ class Siswa extends CI_Controller {
 					array(
 							'field' => 'nama',
 							'label' => 'nama',
-							'rules' => 'required',
+							//'rules' => 'required',
 							'errors' => array('required' => '%s tidak boleh kosong',),
 					),
 					array(
@@ -39,7 +39,7 @@ class Siswa extends CI_Controller {
 					array(
 							'field' => 'jkelamin',
 							'label' => 'Jenis Kelamin',
-							'rules' => 'required',
+							//'rules' => 'required',
 							'errors' => array('required' => '%s tidak boleh kosong',),
 					),
 					array(
@@ -50,13 +50,13 @@ class Siswa extends CI_Controller {
 					array(
 							'field' => 'nayah',
 							'label' => 'Nama Ayah',
-							'rules' => 'required',
+							//'rules' => 'required',
 							'errors' => array('required' => '%s tidak boleh kosong',),
 					),
 					array(
 							'field' => 'nibu',
 							'label' => 'Nama Ibu',
-							'rules' => 'required',
+							//'rules' => 'required',
 							'errors' => array('required' => '%s tidak boleh kosong',),
 					),
 					array(
@@ -92,14 +92,14 @@ class Siswa extends CI_Controller {
 					array(
 							'field' => 'kwnegara',
 							'label' => 'Kewarganegaraan',
-							'rules' => 'required',
+							//'rules' => 'required',
 							'errors' => array('required' => '%s tidak boleh kosong',),
 					),
 			);
 			$this->form_validation->set_rules($config);
 			if ($this->form_validation->run() == FALSE){
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">'.validation_errors().'</div>');
-				redirect(base_url('siswa/tambahsiswa2'));
+				redirect(base_url('siswa/tambahsiswa'));
 			}else{
 				$nis=$this->input->post('nis');
 				$thn_masuk=$this->input->post('id');
@@ -119,9 +119,23 @@ class Siswa extends CI_Controller {
 						'pekerjaan_ibu'=>$this->input->post('pkibu'),
 						'asal_sekolah'=>$this->input->post('asekolah'),
 						'tahun_masuk'=>$thn_masuk,
-						'kewarganegaraan'=>$this->input->post('kwnegara')
+						'kewarganegaraan'=>$this->input->post('kwnegara'),
+						'update_by'=>$this->session->userdata('id')
 				);
 			}
+			$this->load->model('siswaM');
+			$result=$this->siswaM->tambahSiswa($data_siswa);
+			if($result=='0'){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">'.$nis.' Telah ditambahkan </div>');
+				$nis=$nis+1;
+				$this->session->set_flashdata('nis',$nis);
+				$this->session->set_flashdata('thn_masuk',$thn_masuk);
+				redirect(base_url('siswa/tambahsiswa'));
+			}else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, silahkan masukan <strong>nis</strong> yang belum digunakan</div>');
+				redirect(base_url('siswa/tambahsiswa'));
+			}
+			
 		}else{
 			$this->load->view('head');
 			$this->load->view('FormTambahSiswa');

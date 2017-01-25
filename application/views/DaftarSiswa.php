@@ -9,16 +9,17 @@
 				</div>
 			</div>
 			<?php 
-				$message=$this->session->flashdata('message');
-				if (!empty($message)){
-					echo $message;
+				if($this->session->flashdata('message')){
+					echo $this->session->flashdata('message');
 				}
 			?>
+			<?php if ($this->session->userdata('level')=='admin'){?>
 			<div class="row">
 				<div class="form-group">
 					<a  href=<?php echo base_url('Siswa/tambahSiswa');?>><i class="fa fa-plus "></i> <b>Tambah Siswa</b></a>
 				</div>
 			</div>
+			<?php }?>
 			<div class="row">
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
