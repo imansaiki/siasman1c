@@ -3,13 +3,20 @@ class Siswa extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		if (!$this->session->userdata('id'))
+		{
+			redirect(base_url());
+		}
 	}
 	function index(){
 		$this->load->view('head');
-		$this->load->view('DaftarSiswa');
+		$this->load->view('SiswaMain');
 		$this->load->view('foot');
 	}
 	function tambahSiswa(){
+		if ($this->session->userdata('level')!='admin'){
+			redirect(base_url('siswa'));
+		}
 		if(!empty($this->input->post('submit'))){
 			$config = array(
 					array(
@@ -140,6 +147,46 @@ class Siswa extends CI_Controller {
 			$this->load->view('head');
 			$this->load->view('FormTambahSiswa');
 			$this->load->view('foot');
+		}
+	}
+	function daftarSiswa(){
+		if (empty($this->uri->segment('3'))){
+			$this->load->view('head');
+			$this->load->view('DaftarKelasSiswa');
+			$this->load->view('foot');
+		}else {
+			$kelas=$this->uri->segment('3');
+			$this->load->model('SiswaM');
+			$data['daftar_siswa']=$this->SiswaM->getDaftarSiswa($kelas);
+			if (empty($data)){
+				redirect(base_url('siswa/daftarSiswa'));
+			}else{
+				$data['kelas']=$kelas;
+				$this->load->view('head');
+				$this->load->view('DaftarSiswa',$data);
+				$this->load->view('foot');
+			}
+		}
+		
+	}
+	function dataSiswa(){
+		if (empty($this->uri->segment('3'))){
+			if ($this->session->userdata('level')=='siswa'){
+				redirect(base_url('siswa/datasiswa/'.$this->session->userdata('id')));
+			}else {
+				redirect(base_url('siswa/daftarsiswa'));
+			}
+		}else {
+			$nis=$this->uri->segment('3');
+			$this->load->model('siswaM');
+			$data['data_siswa']=$this->siswaM->getDataSiswa($nis);
+			if (empty($data)){
+				redirect(base_url('siswa/daftarSiswa'));
+			}else{
+				$this->load->view('head');
+				$this->load->view('DataSiswa',$data);
+				$this->load->view('foot');
+			}
 		}
 	}
 }

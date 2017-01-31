@@ -5,7 +5,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="page-header">Daftar Siswa</h1>
+					<h1 class="page-header">Daftar Siswa <?php echo $kelas ;?></h1>
 				</div>
 			</div>
 			<?php 
@@ -13,171 +13,27 @@
 					echo $this->session->flashdata('message');
 				}
 			?>
-			<?php if ($this->session->userdata('level')=='admin'){?>
-			<div class="row">
-				<div class="form-group">
-					<a  href=<?php echo base_url('Siswa/tambahSiswa');?>><i class="fa fa-plus "></i> <b>Tambah Siswa</b></a>
-				</div>
-			</div>
+			<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+				<thead>
+					<tr>
+						<th>NIS</th>
+						<th>Nama</th>
+						<th>Kelamin</th>
+						<th>Menu</th>
+					</tr>
+				</thead>
+				<tbody>
+			<?php 
+				foreach ($daftar_siswa as $row){?>
+					<tr>
+						<td><?php echo $nis=$row->nis;?></td>
+						<td><?php echo $row->nama;?></td>
+						<td><?php echo $row->kelamin;?></td>
+						<td><a href="<?php echo base_url('siswa/datasiswa/'.$nis);?>">Detail</a></td>
+					</tr>
 			<?php }?>
-			<div class="row">
-					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-						<thead>
-							<tr>
-								<th>NIS</th>
-								<th>Nama</th>
-								<th>Level</th>
-								<th>Menu</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-						</tbody>
-					</table>
-			</div>
+				</tbody>
+			</table>
 		</div>
 	</div>
 <!-- /.Tabel akun -->

@@ -16,7 +16,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-1" for="nis">NIS</label>
 					<div class="col-md-11" >
-						<input <?php if ($this->session->flashdata('nis'))?> class="form-control" placeholder="nis" value="<?php { echo $this->session->flashdata('nis'); }?>" placeholder="nis" name="nis" type="text" required />
+						<input <?php if ($this->session->flashdata('nis'))?> class="form-control" placeholder="nis" value="<?php { echo $this->session->flashdata('nis'); }?>" placeholder="nis" name="nis" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
