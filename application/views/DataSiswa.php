@@ -42,52 +42,52 @@
 					<tr>
 						<td>Agama</td>
 						<td>:</td>
-						<td id="agama"></td>
-					</tr>
-					<tr>
-						<td>Nama Ayah</td>
-						<td>:</td>
-						<td id="namaayah"></td>
-					</tr>
-					<tr>
-						<td>Nama Ibu</td>
-						<td>:</td>
-						<td id="namaibu"></td>
-					</tr>
-					<tr>
-						<td>Pendidikan Ayah</td>
-						<td>:</td>
-						<td id="pendidikanayah"></td>
-					</tr>
-					<tr>
-						<td>Pendidikan Ibu</td>
-						<td>:</td>
-						<td id="pendidikanibu"></td>
-					</tr>
-					<tr>
-						<td>Pekerjaan Ayah</td>
-						<td>:</td>
-						<td id="pekerjaanayah"></td>
-					</tr>
-					<tr>
-						<td>Pekerjaan Ibu</td>
-						<td>:</td>
-						<td id="pekerjaanibu"></td>
+						<td><?php echo $data_siswa->agama;?></td>
 					</tr>
 					<tr>
 						<td>Alamat</td>
 						<td>:</td>
-						<td id="alamat"></td>
+						<td><?php echo $data_siswa->alamat;?></td>
+					</tr>
+					<tr>
+						<td>Nama Ayah</td>
+						<td>:</td>
+						<td><?php echo $data_siswa->nama_ayah;?></td>
+					</tr>
+					<tr>
+						<td>Nama Ibu</td>
+						<td>:</td>
+						<td><?php echo $data_siswa->nama_ibu;?></td>
+					</tr>
+					<tr>
+						<td>Pendidikan Ayah</td>
+						<td>:</td>
+						<td><?php echo $data_siswa->pendidikan_ayah;?></td>
+					</tr>
+					<tr>
+						<td>Pendidikan Ibu</td>
+						<td>:</td>
+						<td><?php echo $data_siswa->pendidikan_ibu;?></td>
+					</tr>
+					<tr>
+						<td>Pekerjaan Ayah</td>
+						<td>:</td>
+						<td><?php echo $data_siswa->pekerjaan_ayah;?></td>
+					</tr>
+					<tr>
+						<td>Pekerjaan Ibu</td>
+						<td>:</td>
+						<td<?php echo $data_siswa->pekerjaan_ibu;?>></td>
 					</tr>
 					<tr>
 						<td>Asal Sekolah</td>
 						<td>:</td>
-						<td id="asalsekolah"></td>
+						<td><?php echo $data_siswa->asal_sekolah;?></td>
 					</tr>
 					<tr>
 						<td>Kewarganegaraan</td>
 						<td>:</td>
-						<td id="kewarganegaraan"></td>
+						<td><?php echo $data_siswa->kewarganegaraan;?></td>
 					</tr>
 				</table>
 				<?php }?>

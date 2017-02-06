@@ -16,7 +16,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-1" for="nis">NIS</label>
 					<div class="col-md-11" >
-						<input <?php if ($this->session->flashdata('nis'))?> class="form-control" placeholder="nis" value="<?php { echo $this->session->flashdata('nis'); }?>" placeholder="nis" name="nis" type="text" />
+						<input <?php if ($this->session->flashdata('nis'))?> class="form-control" placeholder="nis" value="<?php { echo $this->session->flashdata('nis'); }?>" placeholder="nis" name="nis" id="nis" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -48,6 +48,54 @@
 						</div>
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="stmasuk">Status masuk</label>
+					<div class="col-md-2" >
+						<div class="radio">
+  							<label><input type="radio" id="stbaru" name="stmasuk" value="baru">Baru</label>
+						</div>
+						<div class="radio">
+  							<label><input type="radio" id="stpindah" name="stmasuk" value="pindah">Pindah</label>
+						</div>
+					</div>
+					<div class="col-md-2" >
+						<label class="control-label" for="kelas">Kelas</label>
+						<div>
+							<select name="kelas" id="kelas" class="form-control" style="display: none">
+								<optgroup id="kX" label="X">
+									<option value="X">XA1</option>
+									<option value="X">XA2</option>
+									<option value="X">XA3</option>
+									<option value="X">XA4</option>
+								</optgroup>
+								<optgroup id="kXI" label="XI">
+									<option value="volvo">Volvo</option>
+									<option value="saab">Saab</option>
+									<option value="fiat">Fiat</option>
+									<option value="audi">Audi</option>
+								</optgroup>
+								<optgroup id="kXII" label="XII">
+									<option value="volvo">Volvo</option>
+									<option value="saab">Saab</option>
+									<option value="fiat">Fiat</option>
+									<option value="audi">Audi</option>
+								</optgroup>
+							</select>
+							<button type="button" id="cekkelas" style="display: none">cek kelas</button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-1" for="alamat">Data tambahan</label>
+					<div class="col-md-11" >
+						<div class="checkbox">
+							<label data-toggle="collapse" data-target="#collapseExample">
+								<input type="checkbox"/> Gunakan Data Tambahan
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="collapse" id="collapseExample">
 				<div class="form-group">
 					<label class="control-label col-md-1" for="alamat">Alamat</label>
 					<div class="col-md-11" >
@@ -109,7 +157,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="kwnegara">Kewarganegaraan</label>
+					<label class="control-label col-md-1" for="kwnegara">Status Warga Negara</label>
 					<div class="col-md-11" >
 						<div class="radio">
   							<label><input type="radio" name="kwnegara" value="WNI">WNI</label>
@@ -118,6 +166,7 @@
   							<label><input type="radio" name="kwnegara" value="WNA">WNA</label>
 						</div>
 					</div>
+				</div>
 				</div>
 				<div class="form-group">
 					<div class="col-md-2 col-md-offset-1">
@@ -130,7 +179,24 @@
 	</div>
 </body>
 <script>
-  $('#submit').on('click', function () {
+$('#submit').on('click', function () {
     $(this).button('loading')
+   
   })
+</script>
+<script>
+$(document).ready(function(){
+    $("#stbaru").click(function(){
+    	$("#cekkelas").show("slow");
+    	$("#kelas").show("slow");
+    	$('#kXI').hide();
+    	$('#kXII').hide();
+    });
+    $("#stpindah").click(function(){
+    	$("#cekkelas").show("slow");
+    	$("#kelas").show("slow");
+    	$('#kXI').show();
+    	$('#kXII').show();
+    });
+});
 </script>
