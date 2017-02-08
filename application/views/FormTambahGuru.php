@@ -4,7 +4,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="page-header">Tambah Siswa</h1>
+					<h1 class="page-header">Tambah Guru</h1>
 				</div>
 			</div>
 			<?php 
@@ -26,25 +26,25 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="tempatlahir">Tempat Lahir</label>
+					<label class="control-label col-md-1" for="tmptlahir">Tempat Lahir</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Tempat Lahir"  name="tempatlahir" type="text" />
+						<input class="form-control" placeholder="Tempat Lahir"  name="tmptlahir" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="tanggallahir">Tanggal Lahir</label>
+					<label class="control-label col-md-1" for="tgllahir">Tanggal Lahir</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Tanggal Lahir"  name="tanggallahir" type="text" />
+						<input class="form-control" placeholder="Tanggal Lahir"  name="tgllahir" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="jeniskelamin">Jenis Kelamin</label>
+					<label class="control-label col-md-1" for="jkelamin">Jenis Kelamin</label>
 					<div class="col-md-11" >
 						<div class="radio">
-  							<label><input type="radio" name="jeniskelamin" value="Pria">Pria</label>
+  							<label><input type="radio" name="jkelamin" value="Pria">Pria</label>
 						</div>
 						<div class="radio">
-  							<label><input type="radio" name="jeniskelamin" value="Wanita">Wanita</label>
+  							<label><input type="radio" name="jkelamin" value="Wanita">Wanita</label>
 						</div>
 					</div>
 				</div>
@@ -73,15 +73,15 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="tgktpendidikan">Tingkat Pendidikan</label>
+					<label class="control-label col-md-1" for="tktpd">Tingkat Pendidikan</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Tingkat Pendidikan"  name="tgkatpendidikan" type="text" />
+						<input class="form-control" placeholder="Tingkat Pendidikan"  name="tktpd" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="jurpendidikan">Jurusan</label>
+					<label class="control-label col-md-1" for="jurpd">Jurusan</label>
 					<div class="col-md-11" >
-						<input class="form-control" placeholder="Jurusan"  name="jurpendidikan" type="text" />
+						<input class="form-control" placeholder="Jurusan"  name="jurpd" type="text" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -96,7 +96,39 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-md-1" for="tambahan">Data tambahan</label>
+					<div class="col-md-11" >
+						<div class="checkbox">
+							<label data-toggle="collapse" data-target="#collapseExample">
+								<input type="checkbox"/> Masukan Mata Pelajaran Ampuhan
+							</label>
+						</div>
+					</div>
+				</div>
+				<!-- Form tambahan -->
+				<div class="collapse" id="collapseExample">
+				
+				<div class="form-group">
+					<label class="control-label col-md-1" for="mapel">Mata Pelajaran</label>
+					<div class="col-md-2" >
+						<select class="form-control" name="mapel">
+							<option value="aaa">B indo</option>
+							<option value="aaa">B inggris</option>
+							<option value="aaa">B jawa</option>
+							<option value="aaa">MTK</option>
+						</select>
+					</div>
+					<label class="control-label col-md-1" for="mapel">Kode Guru</label>
+					<div class="col-md-2" >
+						<input class="form-control" placeholder="Jurusan"  name="jurpd" type="text" />
+					</div>
+				</div>
+				
+				</div>
+				<!-- /Form tambahan -->
+				<div class="form-group">
 					<div class="col-md-2">
+						<input type="hidden" name="submit" value="submit" class="form-control">
 						<input type="submit" value="kirim" class="form-control btn-primary">
 					</div>
 				</div>

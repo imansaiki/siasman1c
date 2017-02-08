@@ -62,6 +62,7 @@
 						<label class="control-label" for="kelas">Kelas</label>
 						<div>
 							<select name="kelas" id="kelas" class="form-control" style="display: none">
+									<option selected> </option>
 								<optgroup id="kX" label="X">
 									<option value="X">XA1</option>
 									<option value="X">XA2</option>
@@ -86,7 +87,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-1" for="alamat">Data tambahan</label>
+					<label class="control-label col-md-1" for="tambahan">Data tambahan</label>
 					<div class="col-md-11" >
 						<div class="checkbox">
 							<label data-toggle="collapse" data-target="#collapseExample">
@@ -95,6 +96,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- Form tambahan -->
 				<div class="collapse" id="collapseExample">
 				<div class="form-group">
 					<label class="control-label col-md-1" for="alamat">Alamat</label>
@@ -168,6 +170,7 @@
 					</div>
 				</div>
 				</div>
+				<!-- /Form tambahan -->
 				<div class="form-group">
 					<div class="col-md-2 col-md-offset-1">
 						<input type="hidden" value="submit" name="submit">

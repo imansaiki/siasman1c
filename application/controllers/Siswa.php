@@ -7,6 +7,8 @@ class Siswa extends CI_Controller {
 		{
 			redirect(base_url());
 		}
+		$this->load->model('jadwalM');
+		$this->load->model('siswaM');
 	}
 	function index(){
 		$this->load->view('head');
@@ -17,6 +19,7 @@ class Siswa extends CI_Controller {
 		if ($this->session->userdata('level')!='admin'){
 			redirect(base_url('siswa'));
 		}
+		
 		if(!empty($this->input->post('submit'))){
 			$config = array(
 					array(
@@ -36,6 +39,12 @@ class Siswa extends CI_Controller {
 					array(
 							'field' => 'tmptlahir',
 							'label' => 'Tempat Lahir',
+							'errors' => array('required' => '%s tidak boleh kosong',),
+					),
+					array(
+							'field' => 'kelas',
+							'label' => 'kelas',
+							'rules' => 'required',
 							'errors' => array('required' => '%s tidak boleh kosong',),
 					),
 					array(
@@ -109,7 +118,8 @@ class Siswa extends CI_Controller {
 				redirect(base_url('siswa/tambahsiswa'));
 			}else{
 				$nis=$this->input->post('nis');
-				$thn_masuk=$this->input->post('id');
+				$semta=$this->jadwalM->getSemTA();
+				$thn_masuk=substr($semta->tahun_ajar,0,4);
 				$data_siswa= array(
 						'nis'=>$nis,
 						'nama'=>$this->input->post('nama'),
@@ -129,14 +139,28 @@ class Siswa extends CI_Controller {
 						'kewarganegaraan'=>$this->input->post('kwnegara'),
 						'update_by'=>$this->session->userdata('id')
 				);
+				$data_akun= array(
+						'id'=>$nis,
+						'password'=>$nis,
+						'level'=>'siswa',
+				);
+				$data_kelas= array(
+						'id_kelas'=>$nis.$semta->tahun_ajar,
+						'nis'=>$nis,
+						'nama_kelas'=>$this->input->post('kelas'),
+						'tahun_ajaran'=>$semta->tahun_ajar,
+				);
 			}
-			$this->load->model('siswaM');
+			
 			$result=$this->siswaM->tambahSiswa($data_siswa);
 			if($result=='0'){
+				$this->load->model('AkunM');
+				$this->load->model('KelasM');
+				$this->AkunM->tambahAkun($data_akun);
+				$this->KelasM->tambahSiswaKelas($data_kelas);
 				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">'.$nis.' Telah ditambahkan </div>');
 				$nis=$nis+1;
 				$this->session->set_flashdata('nis',$nis);
-				$this->session->set_flashdata('thn_masuk',$thn_masuk);
 				redirect(base_url('siswa/tambahsiswa'));
 			}else{
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, silahkan masukan <strong>nis</strong> yang belum digunakan</div>');
@@ -156,9 +180,8 @@ class Siswa extends CI_Controller {
 			$this->load->view('foot');
 		}else {
 			$kelas=$this->uri->segment('3');
-			$this->load->model('SiswaM');
 			$data['daftar_siswa']=$this->SiswaM->getDaftarSiswa($kelas);
-			if (empty($data)){
+			if (empty($data['daftar_siswa'])){
 				redirect(base_url('siswa/daftarSiswa'));
 			}else{
 				$data['kelas']=$kelas;
@@ -178,9 +201,8 @@ class Siswa extends CI_Controller {
 			}
 		}else {
 			$nis=$this->uri->segment('3');
-			$this->load->model('siswaM');
 			$data['data_siswa']=$this->siswaM->getDataSiswa($nis);
-			if (empty($data)){
+			if (empty($data['data_siswa'])){
 				redirect(base_url('siswa/daftarSiswa'));
 			}else{
 				$this->load->view('head');
