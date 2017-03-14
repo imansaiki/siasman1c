@@ -7,8 +7,11 @@ class Siswa extends CI_Controller {
 		{
 			redirect(base_url());
 		}
-		$this->load->model('jadwalM');
 		$this->load->model('siswaM');
+		$this->load->model('daftarkelasM');
+		$this->load->model('kelasM');
+		$this->load->model('tahunajaranM');
+		$this->semTA=$this->tahunajaranM->getSemTA();
 	}
 	function index(){
 		$this->load->view('head');
@@ -19,7 +22,8 @@ class Siswa extends CI_Controller {
 		if ($this->session->userdata('level')!='admin'){
 			redirect(base_url('siswa'));
 		}
-		
+		$this->load->model('kelasM');
+		$data['daftar_kelas']=$this->kelasM->getDaftarKelas();
 		if(!empty($this->input->post('submit'))){
 			$config = array(
 					array(
@@ -118,8 +122,7 @@ class Siswa extends CI_Controller {
 				redirect(base_url('siswa/tambahsiswa'));
 			}else{
 				$nis=$this->input->post('nis');
-				$semta=$this->jadwalM->getSemTA();
-				$thn_masuk=substr($semta->tahun_ajar,0,4);
+				$thn_masuk=substr($this->semTA->tahun_ajar,0,4);
 				$data_siswa= array(
 						'nis'=>$nis,
 						'nama'=>$this->input->post('nama'),
@@ -145,10 +148,9 @@ class Siswa extends CI_Controller {
 						'level'=>'siswa',
 				);
 				$data_kelas= array(
-						'id_kelas'=>$nis.$semta->tahun_ajar,
 						'nis'=>$nis,
 						'nama_kelas'=>$this->input->post('kelas'),
-						'tahun_ajaran'=>$semta->tahun_ajar,
+						'tahun_ajaran'=>$this->semTA->tahun_ajar
 				);
 			}
 			
@@ -169,18 +171,19 @@ class Siswa extends CI_Controller {
 			
 		}else{
 			$this->load->view('head');
-			$this->load->view('FormTambahSiswa');
+			$this->load->view('FormTambahSiswa',$data);
 			$this->load->view('foot');
 		}
 	}
 	function daftarSiswa(){
 		if (empty($this->uri->segment('3'))){
+			$data['daftar_kelas']=$this->daftarkelasM->getDaftarKelas();
 			$this->load->view('head');
-			$this->load->view('DaftarKelasSiswa');
+			$this->load->view('DaftarKelasSiswa',$data);
 			$this->load->view('foot');
 		}else {
 			$kelas=$this->uri->segment('3');
-			$data['daftar_siswa']=$this->SiswaM->getDaftarSiswa($kelas);
+			$data['daftar_siswa']=$this->kelasM->getDaftarSiswa($kelas,$this->semTA->tahun_ajar);
 			if (empty($data['daftar_siswa'])){
 				redirect(base_url('siswa/daftarSiswa'));
 			}else{

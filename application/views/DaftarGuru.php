@@ -25,157 +25,29 @@
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr>
-								<th>NIS</th>
+								<th>NIP</th>
 								<th>Nama</th>
-								<th>Level</th>
+								<th>Alamat</th>
 								<th>Menu</th>
 							</tr>
 						</thead>
 						<tbody>
+						<?php 
+						if (isset($daftar_guru)){
+							foreach ($daftar_guru as $row){
+						?>	
+						
+						
 							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
+								<td><?php echo $row->nip;?></td>
+								<td><?php echo $row->nama;?></td>
+								<td><?php echo $row->alamat;?></td>
+								<td><a href="<?php echo base_url('guru/dataguru/'.$row->nip);?>">Detail</a></td>
 							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
-							<tr>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-								<td>AAA</td>
-							</tr>
+						<?php 
+							}
+						}
+						?>
 						</tbody>
 					</table>
 				

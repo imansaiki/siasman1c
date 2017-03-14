@@ -40,4 +40,36 @@ class GuruM extends CI_Model{
 			return $query;
 		}
 	}
+	function getDaftarGuru(){
+		//cleaning query from XSS
+		$this->db->flush_cache();
+		$this->db->select('nip, nama, alamat');
+		$this->db->from('guru');
+		//execute query
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function getDataGuru($data){
+		//cleaning query from XSS
+		$data = $this->security->xss_clean($data);
+		$data = $this->db->escape_str($data);
+		$this->db->flush_cache();
+		$this->db->from('guru');
+		$this->db->where('nip',$data);
+		//execute query
+		$query = $this->db->get();
+		return $query->row();
+	}
+	function getDataAmpuhan($data){
+		//cleaning query from XSS
+		$data = $this->security->xss_clean($data);
+		$data = $this->db->escape_str($data);
+		$this->db->flush_cache();
+		$this->db->from('ampuhan');
+		$this->db->where('nip',$data);
+		//execute query
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 }

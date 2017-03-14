@@ -62,24 +62,51 @@
 						<label class="control-label" for="kelas">Kelas</label>
 						<div>
 							<select name="kelas" id="kelas" class="form-control" style="display: none">
+							<?php 
+							if (isset($daftar_kelas)){
+								$i=0;
+								$j=0;
+								$k=0;
+								foreach ($daftar_kelas as $row){
+								switch ($row->tingkat){
+										case '1':
+											$satu[$i]=$row->nama_kelas;
+											$i++;
+											break;
+										case '2':
+											$dua[$j]=$row->nama_kelas;
+											$j++;
+											break;
+										case '3':
+											$tiga[$k]=$row->nama_kelas;
+											$k++;
+											break;
+											
+									}
+								}
+							}
+							?>
 									<option selected> </option>
 								<optgroup id="kX" label="X">
-									<option value="X">XA1</option>
-									<option value="X">XA2</option>
-									<option value="X">XA3</option>
-									<option value="X">XA4</option>
+							<?php 
+							foreach ($satu as $row){
+								echo '<option value="'.$row.'">'.$row.'</option>' ;
+							}
+							?>
 								</optgroup>
 								<optgroup id="kXI" label="XI">
-									<option value="volvo">Volvo</option>
-									<option value="saab">Saab</option>
-									<option value="fiat">Fiat</option>
-									<option value="audi">Audi</option>
+							<?php 
+							foreach ($dua as $row){
+								echo '<option value="'.$row.'">'.$row.'</option>' ;
+							}
+							?>
 								</optgroup>
 								<optgroup id="kXII" label="XII">
-									<option value="volvo">Volvo</option>
-									<option value="saab">Saab</option>
-									<option value="fiat">Fiat</option>
-									<option value="audi">Audi</option>
+							<?php 
+							foreach ($tiga as $row){
+								echo '<option value="'.$row.'">'.$row.'</option>' ;
+							}
+							?>
 								</optgroup>
 							</select>
 							<button type="button" id="cekkelas" style="display: none">cek kelas</button>

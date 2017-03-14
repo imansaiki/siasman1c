@@ -15,13 +15,40 @@ class Guru extends CI_Controller {
 		$this->load->view('DaftarGuru');
 		$this->load->view('foot');
 	}
+	function daftarGuru(){
+		$data['daftar_guru']=$this->guruM->getDaftarGuru();
+		$this->load->view('head');
+		$this->load->view('DaftarGuru',$data);
+		$this->load->view('foot');
+	}
+	function dataGuru(){
+		if (empty($this->uri->segment('3'))){
+			if ($this->session->userdata('level')=='guru'){
+				redirect(base_url('guru/dataguru/'.$this->session->userdata('id')));
+			}else {
+				redirect(base_url('guru'));
+			}
+		}else {
+			$nip=$this->uri->segment('3');
+			$data['data_guru']=$this->guruM->getDataGuru($nip);
+			$data['data_ampuhan']=$this->guruM->getDataAmpuhan($nip);
+			if (empty($data['data_guru'])){
+				redirect(base_url('guru'));
+			}else{
+				$this->load->view('head');
+				$this->load->view('DataGuru',$data);
+				$this->load->view('foot');
+			}
+		}
+	}
 	function tambahGuru(){
 		if ($this->session->userdata('level')!='admin'){
 			redirect(base_url('guru'));
 		}
+		$data['daftar_mapel']=$this->jadwalM->getDaftarMapel();
 		if (empty($this->input->post('submit'))){
 			$this->load->view('head');
-			$this->load->view('FormTambahGuru');
+			$this->load->view('FormTambahGuru',$data);
 			$this->load->view('foot');
 		}else{
 			$config = array(
@@ -62,7 +89,7 @@ class Guru extends CI_Controller {
 							'errors' => array('required' => '%s tidak boleh kosong',),
 					),
 					array(
-							'field' => 'telepom',
+							'field' => 'telepon',
 							'label' => 'Nomor Telepon',
 							//'rules' => 'required',
 							'errors' => array('required' => '%s tidak boleh kosong',),
@@ -103,8 +130,6 @@ class Guru extends CI_Controller {
 				redirect(base_url('guru/tambahguru'));
 			}else {
 				$nip=$this->input->post('nip');
-				$kodeguru=$this->input->post('kodeguru');
-				$pelajaran=$this->input->post('pelajaran');
 				$data_guru= array(
 						'nip'=>$nip,
 						'nama'=>$this->input->post('nama'),
@@ -113,6 +138,7 @@ class Guru extends CI_Controller {
 						'kelamin'=>$this->input->post('jkelamin'),
 						'alamat'=>$this->input->post('alamat'),
 						'agama'=>$this->input->post('agama'),
+						'telepon'=>$this->input->post('telepon'),
 						'email'=>$this->input->post('email'),
 						'pendidikan_tingkat'=>$this->input->post('tktpd'),
 						'pendidikan_studi'=>$this->input->post('jurpd'),
@@ -124,16 +150,44 @@ class Guru extends CI_Controller {
 						'password'=>$nip,
 						'level'=>'guru',
 				);
-				$data_ampuhan= array(
-						'kode_guru'=>$kodeguru,
-						'password'=>$nip,
-						'nama_pelajaran'=>$pelajaran,
-				);
+				if ($this->input->post('ampuhan')=='ampuhan'){
+					$config2 = array(
+							array(
+									'field' => 'mapel',
+									'label' => 'Mapel Ampuhan',
+									'rules' => 'required',
+									'errors' => array(
+											'required' => '%s tidak boleh kosong',),
+										
+							),
+							array(
+									'field' => 'kodeguru',
+									'label' => 'Kode Guru',
+									//'rules' => 'required',
+									'errors' => array('required' => '%s tidak boleh kosong',),
+							),
+					);
+					$this->form_validation->set_rules($config2);
+					if ($this->form_validation->run() == FALSE){
+						$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">'.validation_errors().'</div>');
+						redirect(base_url('guru/tambahguru'));
+					}else {
+						$data_ampuhan= array(
+								'kode_guru'=>$this->input->post('kodeguru'),
+								'nip'=>$nip,
+								'nama_pelajaran'=>$this->input->post('mapel'),
+						);
+					}
+				}
+			
 				$data=$this->guruM->tambahGuru($data_guru);
 				if ($data=='0'){
 					//success
 					$this->load->model('AkunM');
 					$this->AkunM->tambahAkun($data_akun);
+					if (!empty($data_ampuhan)){
+						$this->guruM->tambahAmpuhan($data_ampuhan);
+					}
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">'.$nip.' Telah ditambahkan </div>');
 					redirect(base_url('guru/tambahguru'));
 				}else {

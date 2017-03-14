@@ -17,8 +17,8 @@ class AkunM extends CI_Model{
 		return $query->result();
 	}
 	function tambahAkun($data){
-		$this->security->xss_clean($data);
-		$this->db->escape_str($data);
+		$data=$this->security->xss_clean($data);
+		$data=$this->db->escape_str($data);
 		$this->db->flush_cache();
 		if(!$this->db->replace('akun',$data)){
 			$query=$this->db->error();

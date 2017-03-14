@@ -100,7 +100,7 @@
 					<div class="col-md-11" >
 						<div class="checkbox">
 							<label data-toggle="collapse" data-target="#collapseExample">
-								<input type="checkbox"/> Masukan Mata Pelajaran Ampuhan
+								<input name="ampuhan" value="ampuhan" type="checkbox"/> Masukan Mata Pelajaran Ampuhan
 							</label>
 						</div>
 					</div>
@@ -112,15 +112,18 @@
 					<label class="control-label col-md-1" for="mapel">Mata Pelajaran</label>
 					<div class="col-md-2" >
 						<select class="form-control" name="mapel">
-							<option value="aaa">B indo</option>
-							<option value="aaa">B inggris</option>
-							<option value="aaa">B jawa</option>
-							<option value="aaa">MTK</option>
+						<?php 
+						if (isset($daftar_mapel)){
+							foreach ($daftar_mapel as $row){
+								echo '<option value="'.$row->nama_pelajaran.'">'.$row->nama_pelajaran.'</option>';
+							}
+						}
+						?>
 						</select>
 					</div>
-					<label class="control-label col-md-1" for="mapel">Kode Guru</label>
+					<label class="control-label col-md-1" for="kodeguru">Kode Guru</label>
 					<div class="col-md-2" >
-						<input class="form-control" placeholder="Jurusan"  name="jurpd" type="text" />
+						<input class="form-control" placeholder="Mata Pelajaran"  name="kodeguru" type="text" />
 					</div>
 				</div>
 				
