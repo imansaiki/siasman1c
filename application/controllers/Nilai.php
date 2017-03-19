@@ -70,7 +70,7 @@ class Nilai extends CI_Controller{
 							foreach ($daftarsiswa as $row){
 								$array[]= array(
 										'nis'=>$row->nis,
-										'nama_kelas'=>$row->nama_kelas,
+										'tingkat'=>$row->tingkat,
 										'tahun_ajaran'=>$this->semTA->tahun_ajar,
 										'semester'=>$this->semTA->semester,
 										'nama_pelajaran'=>$mapel

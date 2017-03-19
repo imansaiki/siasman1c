@@ -6,4 +6,11 @@ class DaftarKelasM extends CI_Model{
 		$query=$this->db->get();
 		return $query->result();
 	}
+	function getDetailKelas($kelas){
+		$this->db->from('daftarkelas');
+		$this->db->where('nama_kelas',$kelas);
+		$query=$this->db->get();
+		return $query->row();
+		
+	}
 }

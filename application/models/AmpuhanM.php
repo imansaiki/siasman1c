@@ -12,7 +12,9 @@ class AmpuhanM extends CI_Model{
 	}
 	function getNamaMapel($data){
 		$this->db->from('ampuhan');
+		$this->db->join('matapelajaran', 'matapelajaran.id_pelajaran = ampuhan.id_pelajaran');
 		$this->db->where('kode_guru',$data);
+		$this->db->select('matapelajaran.nama_pelajaran');
 		$query=$this->db->get();
 		return $query->row();
 	}

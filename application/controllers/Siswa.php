@@ -23,7 +23,7 @@ class Siswa extends CI_Controller {
 			redirect(base_url('siswa'));
 		}
 		$this->load->model('kelasM');
-		$data['daftar_kelas']=$this->kelasM->getDaftarKelas();
+		$data['daftar_kelas']=$this->daftarkelasM->getDaftarKelas();
 		if(!empty($this->input->post('submit'))){
 			$config = array(
 					array(
@@ -122,6 +122,11 @@ class Siswa extends CI_Controller {
 				redirect(base_url('siswa/tambahsiswa'));
 			}else{
 				$nis=$this->input->post('nis');
+				$kelas=$this->input->post('kelas');
+				$detailkelas=$this->daftarkelasM->getDetailKelas($kelas);
+				$tingkat=$detailkelas->tingkat;
+				$jurusan=$detailkelas->jurusan;
+				$semester='1';
 				$thn_masuk=substr($this->semTA->tahun_ajar,0,4);
 				$data_siswa= array(
 						'nis'=>$nis,
@@ -149,17 +154,18 @@ class Siswa extends CI_Controller {
 				);
 				$data_kelas= array(
 						'nis'=>$nis,
-						'nama_kelas'=>$this->input->post('kelas'),
+						'nama_kelas'=>$kelas,
 						'tahun_ajaran'=>$this->semTA->tahun_ajar
 				);
 			}
 			
 			$result=$this->siswaM->tambahSiswa($data_siswa);
 			if($result=='0'){
-				$this->load->model('AkunM');
-				$this->load->model('KelasM');
-				$this->AkunM->tambahAkun($data_akun);
-				$this->KelasM->tambahSiswaKelas($data_kelas);
+				$this->load->model('akunM');
+				$this->load->model('nilaiM');
+				$this->akunM->tambahAkun($data_akun);
+				$this->kelasM->tambahSiswaKelas($data_kelas);
+				$this->nilaiM->nilaiPaket($nis,$tingkat,$jurusan,$semester,$this->semTA->tahun_ajar);
 				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">'.$nis.' Telah ditambahkan </div>');
 				$nis=$nis+1;
 				$this->session->set_flashdata('nis',$nis);

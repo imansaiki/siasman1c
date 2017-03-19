@@ -20,6 +20,7 @@ function getDaftarSiswa($data,$data2){
 		$this->db->flush_cache();
 		$this->db->from('kelas');
 		$this->db->join('siswa', 'siswa.nis = kelas.nis');
+		$this->db->join('daftarkelas', 'daftarkelas.nama_kelas = kelas.nama_kelas');
 		$this->db->where('nama_kelas',$data);
 		$this->db->where('tahun_ajaran',$data2);
 		//execute query
