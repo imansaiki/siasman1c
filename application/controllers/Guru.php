@@ -44,8 +44,10 @@ class Guru extends CI_Controller {
 	function tambahGuru(){
 		if ($this->session->userdata('level')!='admin'){
 			redirect(base_url('guru'));
+			break;
 		}
-		$data['daftar_mapel']=$this->jadwalM->getDaftarMapel();
+		$this->load->model('matapelajaranM');
+		$data['daftar_mapel']=$this->matapelajaranM->getDaftarMapel();
 		if (empty($this->input->post('submit'))){
 			$this->load->view('head');
 			$this->load->view('FormTambahGuru',$data);
@@ -175,7 +177,7 @@ class Guru extends CI_Controller {
 						$data_ampuhan= array(
 								'kode_guru'=>$this->input->post('kodeguru'),
 								'nip'=>$nip,
-								'nama_pelajaran'=>$this->input->post('mapel'),
+								'id_pelajaran'=>$this->input->post('mapel'),
 						);
 					}
 				}
@@ -186,7 +188,8 @@ class Guru extends CI_Controller {
 					$this->load->model('AkunM');
 					$this->AkunM->tambahAkun($data_akun);
 					if (!empty($data_ampuhan)){
-						$this->guruM->tambahAmpuhan($data_ampuhan);
+						$this->load->model('ampuhanM');
+						$this->ampuhanM->tambahAmpuhan($data_ampuhan);
 					}
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">'.$nip.' Telah ditambahkan </div>');
 					redirect(base_url('guru/tambahguru'));

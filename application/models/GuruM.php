@@ -27,19 +27,7 @@ class GuruM extends CI_Model{
 			return $query;
 		}
 	}
-	function tambahAmpuhan($data){
-		//cleaning query from XSS
-		$data = $this->security->xss_clean($data);
-		$data = $this->db->escape_str($data);
-		$this->db->flush_cache();
-		if(!$this->db->insert('ampuhan',$data)){
-			$query=$this->db->error();
-			return $query['code'];
-		}else {
-			$query='0';
-			return $query;
-		}
-	}
+	
 	function getDaftarGuru(){
 		//cleaning query from XSS
 		$this->db->flush_cache();

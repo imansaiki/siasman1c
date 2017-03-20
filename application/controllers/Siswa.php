@@ -126,7 +126,7 @@ class Siswa extends CI_Controller {
 				$detailkelas=$this->daftarkelasM->getDetailKelas($kelas);
 				$tingkat=$detailkelas->tingkat;
 				$jurusan=$detailkelas->jurusan;
-				$semester='1';
+				$semester=$this->input->post('semester');
 				$thn_masuk=substr($this->semTA->tahun_ajar,0,4);
 				$data_siswa= array(
 						'nis'=>$nis,

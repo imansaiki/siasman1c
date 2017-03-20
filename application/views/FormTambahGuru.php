@@ -115,7 +115,7 @@
 						<?php 
 						if (isset($daftar_mapel)){
 							foreach ($daftar_mapel as $row){
-								echo '<option value="'.$row->nama_pelajaran.'">'.$row->nama_pelajaran.'</option>';
+								echo '<option value="'.$row->id_pelajaran.'">'.$row->nama_pelajaran.'</option>';
 							}
 						}
 						?>

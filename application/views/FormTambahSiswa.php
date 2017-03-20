@@ -112,6 +112,14 @@
 							<button type="button" id="cekkelas" style="display: none">cek kelas</button>
 						</div>
 					</div>
+					<div class="col-md-2" >
+						<label class="control-label" for="kelas">Kelas</label>
+						<input type="hidden" name="semester" value="1" id="semesteralt">
+						<select class="form-control" name="semester" id="semester" style="display: none">
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</select>
+					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-1" for="tambahan">Data tambahan</label>
@@ -219,12 +227,19 @@ $(document).ready(function(){
     $("#stbaru").click(function(){
     	$("#cekkelas").show("slow");
     	$("#kelas").show("slow");
+    	$("#semester").show("slow");
+    	$("#semester").val("1");
+    	$('#semester').attr('disabled', true);
+    	$('#semesteralt').attr('disabled', false);
     	$('#kXI').hide();
     	$('#kXII').hide();
     });
     $("#stpindah").click(function(){
     	$("#cekkelas").show("slow");
     	$("#kelas").show("slow");
+    	$("#semester").show("slow");
+    	$('#semester').attr('disabled', false);
+    	$('#semesteralt').attr('disabled', true);
     	$('#kXI').show();
     	$('#kXII').show();
     });
