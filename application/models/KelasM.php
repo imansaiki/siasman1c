@@ -13,16 +13,13 @@ class KelasM extends CI_Model{
 			return $query;
 		}
 	}
-function getDaftarSiswa($data,$data2){
-		//cleaning query from XSS
-		$data = $this->security->xss_clean($data);
-		$data = $this->db->escape_str($data);
+function getDaftarSiswa($kelas,$thajar){
 		$this->db->flush_cache();
 		$this->db->from('kelas');
 		$this->db->join('siswa', 'siswa.nis = kelas.nis');
 		$this->db->join('daftarkelas', 'daftarkelas.nama_kelas = kelas.nama_kelas');
-		$this->db->where('nama_kelas',$data);
-		$this->db->where('tahun_ajaran',$data2);
+		$this->db->where('kelas.nama_kelas',$kelas);
+		$this->db->where('kelas.tahun_ajaran',$thajar);
 		//execute query
 		$query = $this->db->get();
 		return $query->result();

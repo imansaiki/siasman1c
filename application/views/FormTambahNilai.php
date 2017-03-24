@@ -30,6 +30,10 @@
 						<td><input type="number" class="form-control" name="harian[]"  value="<?php echo $row->harian; ?>"></td>
 						<td><input type="number" class="form-control" name="uts[]"  value="<?php echo $row->harian; ?>"></td>
 						<td><input type="number" class="form-control" name="uas[]"  value="<?php echo $row->harian; ?>"></td>
+						<input type="hidden" name="idpelajaran[]"  value="<?php echo $row->id_pelajaran; ?>">
+						<input type="hidden" name="tingkat[]"  value="<?php echo $row->tingkat; ?>">
+						<input type="hidden" name="semester[]"  value="<?php echo $row->semester; ?>">
+						<input type="hidden" name="tahunajaran[]"  value="<?php echo $row->tahun_ajaran; ?>">
 					</tr>
 					
 					<?php }}?>

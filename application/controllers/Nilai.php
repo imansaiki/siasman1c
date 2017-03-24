@@ -27,15 +27,20 @@ class Nilai extends CI_Controller{
 					break;
 				case 'admin':
 					if (empty($this->uri->segment('3'))){
-						$data['daftar_ampuhan']=$this->daftarkelasM->getDaftarKelas();
+						$data['daftar_kelas']=$this->daftarkelasM->getDaftarKelas();
 						$this->load->view('head');
+						$this->load->view('DaftarKelasSiswa',$data);
 						$this->load->view('foot');
 					}else {
-						$kelas=$this->uri->segment('3');
-						$this->load->model('siswaM');
-						$data['daftar_siswa']=$this->siswaM->getDaftarSiswa($kelas);
-						$this->load->view('head');
-						$this->load->view('foot');
+						$nis=$this->uri->segment('3');
+						$data=$this->nilaiM->getNilaiSiswa($nis);
+						if (empty($data)){
+							redirect(base_url('nilai/tambahnilai'));
+						}else {
+							$this->load->view('head');
+							$this->load->view('FormTambahNilaiSiswa',$data);
+							$this->load->view('foot');
+						}
 					}
 					break;
 				case 'guru':
@@ -43,12 +48,7 @@ class Nilai extends CI_Controller{
 					$data['daftar_ampuhan']=$this->ampuhanM->getKelasAmpuhan($this->session->userdata('id'));
 					if (empty($this->uri->segment('3'))){
 						$this->load->view('head');
-						foreach ($data['daftar_ampuhan'] as $row){
-							echo $row->nama_kelas;
-							//echo $row->kode_guru;
-							echo '<br>';
-								
-						}
+						$this->load->view('DaftarKelasAmpuhan',$data);
 						$this->load->view('foot');
 					}else {
 						$kelas=$this->uri->segment('3');
@@ -76,6 +76,39 @@ class Nilai extends CI_Controller{
 			}
 				
 		}else{
+			$nis=$this->input->post('nis');
+			$idpelajaran=$this->input->post('idpelajaran');
+			$tingkat=$this->input->post('tingkat');
+			$semester=$this->input->post('semester');
+			$tahunajaran=$this->input->post('tahunajaran');
+			$harian=$this->input->post('harian');
+			$uts=$this->input->post('uts');
+			$uas=$this->input->post('uas');
+			
+			foreach ($nis as $key=> $n){
+				if ($harian[$key]>100 or $uts[$key]>100 or $uas[$key]>100){
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, nilai tidak boleh lebih dari 100</div>');
+					break;
+				}elseif ($harian[$key]<0 or $uts[$key]<0 or $uas[$key]<0){
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, nilai tidak boleh lebih dari 100</div>');
+					break;
+				}elseif ($harian[$key]==null or $uts[$key]==null or $uas[$key]==null){
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, nilai tidak boleh kosong</div>');
+					break;
+				}
+				$data[] = array(
+						'nis' => $n,
+						'id_pelajaran'  => $idpelajaran[$key],
+						'tingkat'  => $tingkat[$key],
+						'semester' => $semester[$key],
+						'tahun_ajaran'  => $tahunajaran[$key],
+						'harian'  => $harian[$key],
+						'uts' => $uts[$key],
+						'uas'  => $uas[$key]
+				);
+				$this->nilaiM->updateNilai($data);
+				redirect(base_url('nilai/tambahnilai'));
+			}
 			
 		}
 	}
