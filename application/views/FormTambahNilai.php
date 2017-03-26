@@ -25,11 +25,12 @@
 					?>
 					
 					<tr>
-						<td><?php echo $row->nis; ?> <input type="hidden" name="nis[]" value="<?php echo $row->nis; ?>"></td>
+						<td><?php echo $row->nis; ?>
 						<td><?php echo $row->nama; ?></td>
 						<td><input type="number" class="form-control" name="harian[]"  value="<?php echo $row->harian; ?>"></td>
-						<td><input type="number" class="form-control" name="uts[]"  value="<?php echo $row->harian; ?>"></td>
-						<td><input type="number" class="form-control" name="uas[]"  value="<?php echo $row->harian; ?>"></td>
+						<td><input type="number" class="form-control" name="uts[]"  value="<?php echo $row->uts; ?>"></td>
+						<td><input type="number" class="form-control" name="uas[]"  value="<?php echo $row->uas; ?>"></td>
+						<input type="hidden" name="nis[]" value="<?php echo $row->nis; ?>"></td>
 						<input type="hidden" name="idpelajaran[]"  value="<?php echo $row->id_pelajaran; ?>">
 						<input type="hidden" name="tingkat[]"  value="<?php echo $row->tingkat; ?>">
 						<input type="hidden" name="semester[]"  value="<?php echo $row->semester; ?>">
@@ -39,6 +40,8 @@
 					<?php }}?>
 				</table>
 				<input type="hidden" name="submit" value="submit">
+				<input type="hidden" name="uri3" value="<?php echo $this->uri->segment('3'); ?>">
+				<input type="hidden" name="uri4" value="<?php echo $this->uri->segment('4'); ?>">
 				<button type="submit" class="form-control btn-primary">Submit</button>
 			</form>
 		</div>

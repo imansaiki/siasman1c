@@ -84,16 +84,21 @@ class Nilai extends CI_Controller{
 			$harian=$this->input->post('harian');
 			$uts=$this->input->post('uts');
 			$uas=$this->input->post('uas');
+			$uri3=$this->input->post('uri3');
+			$uri4=$this->input->post('uri4');
 			
 			foreach ($nis as $key=> $n){
 				if ($harian[$key]>100 or $uts[$key]>100 or $uas[$key]>100){
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, nilai tidak boleh lebih dari 100</div>');
+					redirect(base_url('nilai/tambahnilai/'.$uri3.'/'.$uri4));
 					break;
 				}elseif ($harian[$key]<0 or $uts[$key]<0 or $uas[$key]<0){
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, nilai tidak boleh lebih dari 100</div>');
+					redirect(base_url('nilai/tambahnilai/'.$uri3.'/'.$uri4));
 					break;
 				}elseif ($harian[$key]==null or $uts[$key]==null or $uas[$key]==null){
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, nilai tidak boleh kosong</div>');
+					redirect(base_url('nilai/tambahnilai/'.$uri3.'/'.$uri4));
 					break;
 				}
 				$data[] = array(
@@ -106,9 +111,12 @@ class Nilai extends CI_Controller{
 						'uts' => $uts[$key],
 						'uas'  => $uas[$key]
 				);
-				$this->nilaiM->updateNilai($data);
-				redirect(base_url('nilai/tambahnilai'));
-			}
+			};
+			echo $uri3.$uri4;
+				$error=$this->nilaiM->updateNilai($data);
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"><b>Berhasil</b>, nilai telah diubah </div>');
+				redirect(base_url('nilai/tambahnilai/'.$uri3.'/'.$uri4));
+			
 			
 		}
 	}

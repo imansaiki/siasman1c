@@ -7,6 +7,11 @@
 					<h1 class="page-header">Daftar Siswa</h1>
 				</div>
 			</div>
+			<?php 
+				if($this->session->flashdata('message')){
+					echo $this->session->flashdata('message');
+				}
+			?>
 			<div class="form-group">
 				Pilih Kelas :
 				<?php 
