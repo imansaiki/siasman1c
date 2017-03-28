@@ -10,6 +10,7 @@ class nilaiM extends CI_Model{
 		}
 	}
 	function getNilaiKelas($mapel,$tingkat,$semester,$thajar){
+		$this->db->flush_cache();
 		$this->db->from('nilai');
 		$this->db->join('siswa','siswa.nis=nilai.nis');
 		$this->db->where('id_pelajaran',$mapel);
@@ -93,11 +94,29 @@ class nilaiM extends CI_Model{
 	}
 	function updateNilai($data){
 		foreach ($data as $row){
+			$this->db->flush_cache();
 			$this->db->replace('nilai',$row);
 			$query=$this->db->error();
 			$query[]=$query['code'];
 		}
 		return $query;
+	}
+	function evalNilai($nis,$thajar){
+		$this->db->start_cache();
+		$this->db->from('nilai');
+		$this->db->where('nilai.nis',$nis);
+		$this->db->where('nilai.tahun_ajaran',$thajar);
+		$X_1=$this->db->get();
+		$X_1=$X_1->result();
+		$this->db->flush_cache();
+		$i=0;
+		foreach ($X_1 as $row){
+			$akhir=($row->harian * 20/100)+($row->uts * 40/100)+($row->uas * 40/100);
+			if ($akhir<75){
+				$i++;
+			}
+		}
+		return $i;
 	}
 	function nilaiPaket($nis,$tingkat,$jurusan,$semester,$tahun){
 		switch ($semester){

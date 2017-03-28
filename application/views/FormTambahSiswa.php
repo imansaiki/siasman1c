@@ -62,49 +62,25 @@
 						<label class="control-label" for="kelas">Kelas</label>
 						<div>
 							<select name="kelas" id="kelas" class="form-control" style="display: none">
-							<?php 
-							if (isset($daftar_kelas)){
-								$i=0;
-								$j=0;
-								$k=0;
-								foreach ($daftar_kelas as $row){
-								switch ($row->tingkat){
-										case '1':
-											$satu[$i]=$row->nama_kelas;
-											$i++;
-											break;
-										case '2':
-											$dua[$j]=$row->nama_kelas;
-											$j++;
-											break;
-										case '3':
-											$tiga[$k]=$row->nama_kelas;
-											$k++;
-											break;
-											
-									}
-								}
-							}
-							?>
 									<option selected> </option>
 								<optgroup id="kX" label="X">
 							<?php 
 							foreach ($satu as $row){
-								echo '<option value="'.$row.'">'.$row.'</option>' ;
+								echo '<option value="'.$row->nama_kelas.'">'.$row->nama_kelas.'</option>' ;
 							}
 							?>
 								</optgroup>
 								<optgroup id="kXI" label="XI">
 							<?php 
 							foreach ($dua as $row){
-								echo '<option value="'.$row.'">'.$row.'</option>' ;
+								echo '<option value="'.$row->nama_kelas.'">'.$row->nama_kelas.'</option>' ;
 							}
 							?>
 								</optgroup>
 								<optgroup id="kXII" label="XII">
 							<?php 
 							foreach ($tiga as $row){
-								echo '<option value="'.$row.'">'.$row.'</option>' ;
+								echo '<option value="'.$row->nama_kelas.'">'.$row->nama_kelas.'</option>' ;
 							}
 							?>
 								</optgroup>
@@ -242,6 +218,17 @@ $(document).ready(function(){
     	$('#semesteralt').attr('disabled', true);
     	$('#kXI').show();
     	$('#kXII').show();
+    });
+    $("#cekkelas").click(function(){
+        var kelas = $("#kelas").val();
+        $.ajax({
+        	  url: "<?php echo base_url('kelas/getisikelas')?>",
+        	  method: "POST",
+        	  data: { id : kelas },
+        	  success: function( result ) {
+        	    $( "body" ).html( "<strong>" + result + "</strong> degrees" );
+        	  }
+        	});
     });
 });
 </script>

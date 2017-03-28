@@ -11,6 +11,7 @@ class AmpuhanM extends CI_Model{
 		return $query->result();
 	}
 	function getNamaMapel($data){
+		$this->db->flush_cache();
 		$this->db->from('ampuhan');
 		$this->db->join('matapelajaran', 'matapelajaran.id_pelajaran = ampuhan.id_pelajaran');
 		$this->db->where('kode_guru',$data);
@@ -19,6 +20,7 @@ class AmpuhanM extends CI_Model{
 		return $query->row();
 	}
 	function getIDMapel($kodeguru){
+		$this->db->flush_cache();
 		$this->db->from('ampuhan');
 		$this->db->where('kode_guru',$kodeguru);
 		$query=$this->db->get();

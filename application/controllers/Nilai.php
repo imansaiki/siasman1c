@@ -27,7 +27,7 @@ class Nilai extends CI_Controller{
 					break;
 				case 'admin':
 					if (empty($this->uri->segment('3'))){
-						$data['daftar_kelas']=$this->daftarkelasM->getDaftarKelas();
+						$data=$this->daftarkelasM->getDaftarKelas();
 						$this->load->view('head');
 						$this->load->view('DaftarKelasSiswa',$data);
 						$this->load->view('foot');

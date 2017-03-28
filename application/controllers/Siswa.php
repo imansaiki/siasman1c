@@ -23,7 +23,7 @@ class Siswa extends CI_Controller {
 			redirect(base_url('siswa'));
 		}
 		$this->load->model('kelasM');
-		$data['daftar_kelas']=$this->daftarkelasM->getDaftarKelas();
+		$data=$this->daftarkelasM->getDaftarKelas();
 		if(!empty($this->input->post('submit'))){
 			$config = array(
 					array(
@@ -183,7 +183,7 @@ class Siswa extends CI_Controller {
 	}
 	function daftarSiswa(){
 		if (empty($this->uri->segment('3'))){
-			$data['daftar_kelas']=$this->daftarkelasM->getDaftarKelas();
+			$data=$this->daftarkelasM->getDaftarKelas();
 			$this->load->view('head');
 			$this->load->view('DaftarKelasSiswa',$data);
 			$this->load->view('foot');

@@ -13,7 +13,7 @@ class KelasM extends CI_Model{
 			return $query;
 		}
 	}
-function getDaftarSiswa($kelas,$thajar){
+	function getDaftarSiswa($kelas,$thajar){
 		$this->db->flush_cache();
 		$this->db->from('kelas');
 		$this->db->join('siswa', 'siswa.nis = kelas.nis');
@@ -24,4 +24,27 @@ function getDaftarSiswa($kelas,$thajar){
 		$query = $this->db->get();
 		return $query->result();
 	}
+	function isikelas($kelas,$thajar){
+		$this->db->flush_cache();
+		$this->db->from('kelas');
+		$this->db->join('siswa','siswa.nis=kelas.nis');
+		$this->db->where('kelas.nama_kelas',$kelas);
+		$this->db->where('kelas.tahun_ajaran',$thajar);
+		$this->db->where('siswa.kelamin','pria');
+		$pria=$this->db->count_all_results();
+		
+		$this->db->from('kelas');
+		$this->db->join('siswa','siswa.nis=kelas.nis');
+		$this->db->where('kelas.nama_kelas',$kelas);
+		$this->db->where('kelas.tahun_ajaran',$thajar);
+		$this->db->where('siswa.kelamin','wanita');
+		$wanita=$this->db->count_all_results();
+		
+		$data=array(
+				'pria'=>$pria,
+				'wanita'=>$wanita
+		);
+		return $data;
+	}
+
 }
