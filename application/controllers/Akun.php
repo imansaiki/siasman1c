@@ -174,6 +174,17 @@ class Akun extends CI_Controller {
 		$this->load->view('DaftarAkun');
 		$this->load->view('foot');
 	}
+	function resetPassword(){
+		$id=$this->input->post('id');
+		$url=$this->input->post('url');
+		$this->load->model('akunM');
+		$this->akunM->resetPassword($id);
+		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+													Password berhasil direset
+													</div>');
+		redirect($url);
+	}
+
 
 
 }

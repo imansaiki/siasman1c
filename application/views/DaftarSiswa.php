@@ -13,9 +13,11 @@
 					echo $this->session->flashdata('message');
 				}
 			?>
-			<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+			<form action="">
+			<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 				<thead>
 					<tr>
+						<th>NO</th>
 						<th>NIS</th>
 						<th>Nama</th>
 						<th>Kelamin</th>
@@ -23,17 +25,26 @@
 					</tr>
 				</thead>
 				<tbody>
+				
 			<?php 
-				foreach ($daftar_siswa as $row){?>
+				foreach ($daftar_siswa as $key=>$row){?>
 					<tr>
+						<td><?php echo $nis=$key+1;?></td>
 						<td><?php echo $nis=$row->nis;?></td>
 						<td><?php echo $row->nama;?></td>
 						<td><?php echo $row->kelamin;?></td>
-						<td><a href="<?php echo base_url('siswa/datasiswa/'.$nis);?>">Detail</a></td>
+						<td>
+							<a href="<?php echo base_url('siswa/datasiswa/'.$nis);?>">Detail</a>
+							<button formaction="<?php echo base_url('siswa/deletesiswa');?>" formmethod="post" name="nis" value="<?php echo $nis;?>" onclick="alert('Apakah anda yakin ingin menghapus data? Semua data nilai dan kelas juga akan dihapus')">Delete</button>
+							<button formaction="<?php echo base_url('akun/resetpassword');?>" formmethod="post" name="id" value="<?php echo $nis;?>" >Reset Password</button>
+						</td>
 					</tr>
 			<?php }?>
+			
 				</tbody>
 			</table>
+			<input type="hidden" value="<?php echo current_url() ;?>" name="url">
+			</form>
 		</div>
 	</div>
 <!-- /.Tabel akun -->

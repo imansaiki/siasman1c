@@ -3,7 +3,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="page-header" >Siswa</h1>
+					<h1 class="page-header" >Guru</h1>
 				</div>
 			</div>
 			<?php 
@@ -12,8 +12,8 @@
 					echo $message;
 				}
 			?>
-			<a href="<?php echo base_url('siswa/tambahsiswa');?>">Tambah Siswa</a><br>
-			<a href="<?php echo base_url('siswa/daftarsiswa');?>">Data Siswa</a><br>
+			<a href="<?php echo base_url('guru/tambahguru');?>">Tambah Guru</a><br>
+			<a href="<?php echo base_url('guru/daftarguru');?>">Data Guru</a><br>
 		</div>
 	</div>
 </body>

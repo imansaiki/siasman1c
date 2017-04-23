@@ -39,4 +39,28 @@ class AmpuhanM extends CI_Model{
 			return $query;
 		}
 	}
+	function deleteAmpuhan($kode){
+		$this->db->flush_cache();
+		$this->db->where('kode_guru',$kode);
+		$this->db->delete('ampuhan');
+	}
+	function getAllKodeGuru(){
+		$this->db->flush_cache();
+		$this->db->from('ampuhan');
+		$query=$this->db->get();
+		return $query->result();
+		
+	}
+	function getAmpuhanGuru($nip){
+		//cleaning query from XSS
+		$nip = $this->security->xss_clean($nip);
+		$nip = $this->db->escape_str($nip);
+		$this->db->flush_cache();
+		$this->db->from('ampuhan');
+		$this->db->join('matapelajaran','matapelajaran.id_pelajaran=ampuhan.id_pelajaran');
+		$this->db->where('ampuhan.nip',$nip);
+		//execute query
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

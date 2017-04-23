@@ -48,9 +48,8 @@ class Kelas extends CI_Controller{
 	function getisikelas(){
 		$kelas=$this->input->post('id');
 		$data=$this->kelasM->isikelas($kelas,$this->semTA->tahun_ajar);
-		//echo $data['pria'];
-		//echo $data['wanita'];
-		echo $data['pria'];
-		echo $data['wanita'];
+		$data=array('jumlah'=>$data['pria']+$data['wanita'],'pria'=>$data['pria'],'wanita'=>$data['wanita']);
+		$data=json_encode($data);
+		echo $data;
 	}
 }

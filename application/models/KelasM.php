@@ -24,6 +24,14 @@ class KelasM extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+	function getKelasSiswa($nis,$thnajar){
+		$this->db->flush_cache();
+		$this->db->from('kelas');
+		$this->db->where('nis',$nis);
+		$this->db->where('tahun_ajaran',$thnajar);
+		$query=$this->db->get();
+		return $query->row();
+	}
 	function isikelas($kelas,$thajar){
 		$this->db->flush_cache();
 		$this->db->from('kelas');

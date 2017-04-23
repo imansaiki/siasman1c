@@ -77,7 +77,7 @@
 					<tr>
 						<td>Pekerjaan Ibu</td>
 						<td>:</td>
-						<td<?php echo $data_siswa->pekerjaan_ibu;?>></td>
+						<td><?php echo $data_siswa->pekerjaan_ibu;?></td>
 					</tr>
 					<tr>
 						<td>Asal Sekolah</td>
@@ -90,6 +90,12 @@
 						<td><?php echo $data_siswa->kewarganegaraan;?></td>
 					</tr>
 				</table>
+				<?php }?>
+				<?php 
+				if ($this->session->userdata('id')==$data_siswa->nis){?>
+				<a class="form-control btn-primary" href="<?php echo base_url('siswa/editsiswa/'.$data_siswa->nis);?>"><button class="btn-primary"> Edit Data</button></a>
+				<?php }elseif ($this->session->userdata('level')=='admin'){?>
+				<a  href="<?php echo base_url('siswa/editsiswa/'.$data_siswa->nis);?>"><button class="btn-primary"> Edit Data</button></a>
 				<?php }?>
 		</div>
 	</div>

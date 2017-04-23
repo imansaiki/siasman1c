@@ -12,6 +12,7 @@
 					echo $this->session->flashdata('message');
 				}
 			?>
+			<!-- Single button -->
 			<form class="form-horizontal" action="<?php echo base_url('Siswa/tambahSiswa');?>" method="post">
 				<div class="form-group">
 					<label class="control-label col-md-1" for="nis">NIS</label>
@@ -85,7 +86,16 @@
 							?>
 								</optgroup>
 							</select>
-							<button type="button" id="cekkelas" style="display: none">cek kelas</button>
+							<div class="btn-group">
+  								<button type="button" style="display: none" id="cekkelas" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    								Cek kelas <span class="caret"></span>
+  								</button>
+  								<ul class="dropdown-menu">
+    								<li><a>Total : <span id="kelascek"></span></a></li>
+    								<li><a>Pria : <span id="pria"></span></a></li>
+    								<li><a>Wanita : <span id="wanita"></span></a></li>
+ 								 </ul>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-2" >
@@ -200,6 +210,7 @@ $('#submit').on('click', function () {
 </script>
 <script>
 $(document).ready(function(){
+	//$('#cekkelas').popover(options);
     $("#stbaru").click(function(){
     	$("#cekkelas").show("slow");
     	$("#kelas").show("slow");
@@ -226,7 +237,10 @@ $(document).ready(function(){
         	  method: "POST",
         	  data: { id : kelas },
         	  success: function( result ) {
-        	    $( "body" ).html( "<strong>" + result + "</strong> degrees" );
+        		  response = jQuery.parseJSON(result);
+        		  $("#kelascek").text( response.jumlah);
+        		  $("#pria").text( response.pria);
+        		  $("#wanita").text( response.wanita);
         	  }
         	});
     });

@@ -42,7 +42,11 @@
 								<td><?php echo $row->nip;?></td>
 								<td><?php echo $row->nama;?></td>
 								<td><?php echo $row->alamat;?></td>
-								<td><a href="<?php echo base_url('guru/dataguru/'.$row->nip);?>">Detail</a></td>
+								<td>
+									<a href="<?php echo base_url('guru/dataguru/'.$row->nip);?>">Detail</a>
+									<button formaction="<?php echo base_url('siswa/deleteguru');?>" formmethod="post" name="nip" value="<?php echo $row_nip;?>" onclick="alert('Apakah anda yakin ingin menghapus data? Semua data ampuhan dan akun juga akan dihapus')">Delete</button>
+							<button formaction="<?php echo base_url('akun/resetpassword');?>" formmethod="post" name="id" value="<?php echo $row_nip;?>" >Reset Password</button>
+								</td>
 							</tr>
 						<?php 
 							}

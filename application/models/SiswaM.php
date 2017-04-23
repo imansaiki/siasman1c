@@ -38,4 +38,35 @@ class SiswaM extends CI_Model{
 		$query = $this->db->get();
 		return $query->row();
 	}
+	function deleteSiswa($nis){
+		$this->db->flush_cache();
+		$this->db->where('nis',$nis);
+		$this->db->delete('siswa');
+		
+		$this->db->flush_cache();
+		$this->db->where('nis',$nis);
+		$this->db->delete('kelas');
+		
+		$this->db->flush_cache();
+		$this->db->where('nis',$nis);
+		$this->db->delete('nilai');
+		
+		$this->db->flush_cache();
+		$this->db->where('nis',$nis);
+		$this->db->delete('akun');
+	}
+	function editSiswa($data){
+		//cleaning query from XSS
+		$data = $this->security->xss_clean($data);
+		$data = $this->db->escape_str($data);
+		$this->db->flush_cache();
+		$this->db->where('nis',$data['nis']);
+		if(!$this->db->update('siswa',$data)){
+			$query=$this->db->error();
+			return $query['code'];
+		}else {
+			$query='0';
+			return $query;
+		}
+	}
 }

@@ -27,6 +27,33 @@ class GuruM extends CI_Model{
 			return $query;
 		}
 	}
+	function deleteGuru($nip){
+		$this->db->flush_cache();
+		$this->db->where('nip',$nip);
+		$this->db->delete('guru');
+		
+		$this->db->flush_cache();
+		$this->db->where('nip',$nip);
+		$this->db->delete('ampuhan');
+		
+		$this->db->flush_cache();
+		$this->db->where('id',$nip);
+		$this->db->delete('akun');
+	}
+	function editGuru($data){
+		//cleaning query from XSS
+		$data = $this->security->xss_clean($data);
+		$data = $this->db->escape_str($data);
+		$this->db->flush_cache();
+		$this->db->where('nip',$data['nip']);
+		if(!$this->db->update('guru',$data)){
+			$query=$this->db->error();
+			return $query['code'];
+		}else {
+			$query='0';
+			return $query;
+		}
+	}
 	
 	function getDaftarGuru(){
 		//cleaning query from XSS
@@ -48,16 +75,6 @@ class GuruM extends CI_Model{
 		$query = $this->db->get();
 		return $query->row();
 	}
-	function getDataAmpuhan($data){
-		//cleaning query from XSS
-		$data = $this->security->xss_clean($data);
-		$data = $this->db->escape_str($data);
-		$this->db->flush_cache();
-		$this->db->from('ampuhan');
-		$this->db->where('nip',$data);
-		//execute query
-		$query = $this->db->get();
-		return $query->result();
-	}
+	
 
 }

@@ -143,11 +143,14 @@
 							
 							<!-- navbar-sidebar-lv2 -->
 							<ul class="nav nav-second-level">
+							<?php 
+							if ($this->session->userdata('level')=='admin'){?>
 								<li>
-									<a href="flot.html">Input jadwal</a>
+									<a href="<?php echo base_url('jadwal/editjadwal')?>">Edit jadwal</a>
 								</li>
+							<?php }?>
 								<li>
-									<a href="morris.html">Lihat jadwal</a>
+									<a href="<?php echo base_url('jadwal/lihatjadwal');?>">Lihat jadwal</a>
 								</li>
 							</ul>
 							<!-- /.navbar-sidebar-lv2 -->
