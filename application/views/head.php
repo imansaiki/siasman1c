@@ -114,10 +114,10 @@
 							<!-- navbar-sidebar-lv2 -->
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="flot.html">Input</a>
+									<a href="<?php echo base_url('nilai/tambahnilai');?>">Input</a>
 								</li>
 								<li>
-									<a href="morris.html">Lihat nilai</a>
+									<a href="<?php echo base_url('nilai/lihatnilai');?>">Lihat nilai</a>
 								</li>
 							</ul>
 							<!-- /.navbar-sidebar-lv2 -->
