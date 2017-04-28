@@ -89,10 +89,10 @@
 				<?php }?>
 				<?php 
 				if ($this->session->userdata('id')==$data_guru->nip){?>
-				<a href="<?php echo base_url('guru/editguru/'.$data_guru->nip);?>"><button class="btn-primary"> Edit Data</button></a>
+				<a href="<?php echo base_url('guru/editguru/'.$data_guru->nip);?>"><button class="form-control btn-primary"> Edit Data</button></a>
 				<?php }elseif ($this->session->userdata('level')=='admin'){?>
-				<a href="<?php echo base_url('guru/editguru/'.$data_guru->nip);?>"><button class="btn-primary"> Edit Data</button></a>
-				<a href="<?php echo base_url('guru/editampuhan/'.$data_guru->nip);?>"><button class="btn-primary"> Edit Ampuhan</button></a>
+				<a href="<?php echo base_url('guru/editguru/'.$data_guru->nip);?>"><button class="form-control btn-primary"> Edit Data</button></a>
+				<a href="<?php echo base_url('guru/editampuhan/'.$data_guru->nip);?>"><button class="form-control btn-primary"> Edit Ampuhan</button></a>
 				<?php }?>
 		</div>
 	</div>

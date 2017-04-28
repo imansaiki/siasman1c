@@ -24,7 +24,6 @@ class Nilai extends CI_Controller{
 			switch ($this->session->userdata('level')){
 				case 'siswa':
 					redirect(base_url('nilai'));
-					break;
 				case 'admin':
 					if (empty($this->uri->segment('3'))){
 						$data=$this->daftarkelasM->getDaftarKelas();
@@ -63,8 +62,7 @@ class Nilai extends CI_Controller{
 						if ($ampuh==1){
 			
 							$mapel=$this->ampuhanM->getIDMapel($kodeguru);
-							$tingkat=$this->daftarkelasM->getDetailKelas($kelas);
-							$data['nilai_kelas']=$this->nilaiM->getNilaiKelas($mapel->id_pelajaran,$tingkat->tingkat,$this->semTA->semester,$this->semTA->tahun_ajar);
+							$data['nilai_kelas']=$this->nilaiM->getNilaiKelas($mapel->id_pelajaran,$kelas,$this->semTA->semester,$this->semTA->tahun_ajar);
 							$this->load->view('head');
 							$this->load->view('FormTambahNilai',$data);
 							$this->load->view('foot');
@@ -118,6 +116,49 @@ class Nilai extends CI_Controller{
 				redirect(base_url('nilai/tambahnilai/'.$uri3.'/'.$uri4));
 			
 			
+		}
+	}
+	function lihatnilai(){
+		switch ($this->session->userdata('level')){
+			case 'guru':
+				if (empty($this->uri->segment('3'))){
+					redirect(base_url('siswa/daftarsiswa'));
+				}else {
+					$nis=$this->uri->segment('3');
+					$data=$this->nilaiM->getNilaiSiswa($nis);
+					if (empty($data)){
+						redirect(base_url('siswa/daftarsiswa'));
+					}else {
+						$data['nis']=$nis;
+						$this->load->view('head');
+						$this->load->view('NilaiSiswa',$data);
+						$this->load->view('foot');
+					}
+				}
+				break;
+			case 'admin':
+			if (empty($this->uri->segment('3'))){
+					redirect(base_url('siswa/daftarsiswa'));
+				}else {
+					$nis=$this->uri->segment('3');
+					$data=$this->nilaiM->getNilaiSiswa($nis);
+					if (empty($data)){
+						redirect(base_url('siswa/daftarsiswa'));
+					}else {
+						$data['nis']=$nis;
+						$this->load->view('head');
+						$this->load->view('NilaiSiswa',$data);
+						$this->load->view('foot');
+					}
+				}
+				break;
+			case 'siswa':
+				$nis=$this->session->userdata('id');
+				$data=$this->nilaiM->getNilaiSiswa($nis);
+				$data['nis']=$nis;
+				$this->load->view('head');
+				$this->load->view('NilaiSiswa',$data);
+				$this->load->view('foot');
 		}
 	}
 }

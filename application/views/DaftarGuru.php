@@ -21,7 +21,7 @@
 				
 			</div>
 			<div class="row">
-				
+					<form>
 					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr>
@@ -43,9 +43,12 @@
 								<td><?php echo $row->nama;?></td>
 								<td><?php echo $row->alamat;?></td>
 								<td>
-									<a href="<?php echo base_url('guru/dataguru/'.$row->nip);?>">Detail</a>
-									<button formaction="<?php echo base_url('siswa/deleteguru');?>" formmethod="post" name="nip" value="<?php echo $row_nip;?>" onclick="alert('Apakah anda yakin ingin menghapus data? Semua data ampuhan dan akun juga akan dihapus')">Delete</button>
-							<button formaction="<?php echo base_url('akun/resetpassword');?>" formmethod="post" name="id" value="<?php echo $row_nip;?>" >Reset Password</button>
+									<a href="<?php echo base_url('guru/dataguru/'.$row->nip);?>"><button type="button" class="btn btn-primary">Detail</button></a>
+									<?php 
+									if($this->session->userdata('level')=='admin'){?>
+									<button class="btn btn-danger" formaction="<?php echo base_url('siswa/deleteguru');?>" formmethod="post" name="nip" value="<?php echo $row->nip;?>" onclick="alert('Apakah anda yakin ingin menghapus data? Semua data ampuhan dan akun juga akan dihapus')">Delete</button>
+									<button class="btn btn-warning" formaction="<?php echo base_url('akun/resetpassword');?>" formmethod="post" name="id" value="<?php echo $row->nip;?>" >Reset Password</button>
+									<?php }?>
 								</td>
 							</tr>
 						<?php 
@@ -54,7 +57,7 @@
 						?>
 						</tbody>
 					</table>
-				
+					</form>
 			</div>
 		</div>
 	</div>
@@ -67,7 +70,9 @@
 
 <script>
 $(document).ready( function () {
-	$('#dataTables-example').DataTable();
+	$('#dataTables-example').DataTable({
+		"lengthChange": false
+	});
 } );
 </script>
 

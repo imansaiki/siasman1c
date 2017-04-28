@@ -9,14 +9,15 @@ class nilaiM extends CI_Model{
 			return $query;
 		}
 	}
-	function getNilaiKelas($mapel,$tingkat,$semester,$thajar){
+	function getNilaiKelas($mapel,$kelas,$semester,$thajar){
 		$this->db->flush_cache();
 		$this->db->from('nilai');
 		$this->db->join('siswa','siswa.nis=nilai.nis');
-		$this->db->where('id_pelajaran',$mapel);
-		$this->db->where('tingkat',$tingkat);
-		$this->db->where('tahun_ajaran',$thajar);
-		$this->db->where('semester',$semester);
+		$this->db->join('kelas','kelas.nis=nilai.nis');
+		$this->db->where('nilai.id_pelajaran',$mapel);
+		$this->db->where('kelas.nama_kelas',$kelas);
+		$this->db->where('nilai.tahun_ajaran',$thajar);
+		$this->db->where('nilai.semester',$semester);
 		$query=$this->db->get();
 		return $query->result();
 	}

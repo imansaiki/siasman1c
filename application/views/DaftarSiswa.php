@@ -17,11 +17,11 @@
 			<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 				<thead>
 					<tr>
-						<th>NO</th>
-						<th>NIS</th>
-						<th>Nama</th>
-						<th>Kelamin</th>
-						<th>Menu</th>
+						<th class="col-md-1">NO</th>
+						<th class="col-md-1">NIS</th>
+						<th class="col-md-5">Nama</th>
+						<th class="col-md-1">Kelamin</th>
+						<th class="col-md-4">Menu</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,9 +34,16 @@
 						<td><?php echo $row->nama;?></td>
 						<td><?php echo $row->kelamin;?></td>
 						<td>
-							<a href="<?php echo base_url('siswa/datasiswa/'.$nis);?>">Detail</a>
-							<button formaction="<?php echo base_url('siswa/deletesiswa');?>" formmethod="post" name="nis" value="<?php echo $nis;?>" onclick="alert('Apakah anda yakin ingin menghapus data? Semua data nilai dan kelas juga akan dihapus')">Delete</button>
-							<button formaction="<?php echo base_url('akun/resetpassword');?>" formmethod="post" name="id" value="<?php echo $nis;?>" >Reset Password</button>
+							<a href="<?php echo base_url('siswa/datasiswa/'.$nis);?>"><button type="button" class="btn btn-primary">Detail</button></a>
+							<?php 
+							if (($this->session->userdata('level')=='guru') || ($this->session->userdata('level')=='admin')){?>
+							<a href="<?php echo base_url('nilai/lihatnilai/'.$nis)?>"><button type="button" class="btn btn-info" >Nilai</button></a>
+							<?php 
+							}if(($this->session->userdata('level')=='admin')){?>
+							<button class="btn btn-danger" formaction="<?php echo base_url('siswa/deletesiswa');?>" formmethod="post" name="nis" value="<?php echo $nis;?>" onclick="alert('Apakah anda yakin ingin menghapus data? Semua data nilai dan kelas juga akan dihapus')">Delete</button>
+							<button class="btn btn-warning" formaction="<?php echo base_url('akun/resetpassword');?>" formmethod="post" name="id" value="<?php echo $nis;?>" >Reset Password</button>
+							<?php 
+							}?>
 						</td>
 					</tr>
 			<?php }?>
@@ -56,7 +63,10 @@
 
 <script>
 $(document).ready( function () {
-	$('#dataTables-example').DataTable();
+	$('#dataTables-example').DataTable({
+		"searching": false,
+		"lengthChange": false
+	});
 } );
 </script>
 

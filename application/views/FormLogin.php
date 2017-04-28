@@ -1,16 +1,18 @@
-
 <body>
-
-<!-- Formlogin -->
+<!-- Form tambah siswa -->
 	<div id="page-wrapper">
 		<div class="container-fluid">
-		<?php 
-			if($this->session->flashdata('message')){
-				echo $this->session->flashdata('message');
-			}else{
-				echo '<div style="padding-top: 81px;"></div>';
-			}
-		?>
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Login</h1>
+				</div>
+			</div>
+			<?php 
+				if($this->session->flashdata('message')){
+					echo $this->session->flashdata('message');
+				}
+			?>
+			
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="panel panel-info" >
