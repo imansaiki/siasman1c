@@ -15,7 +15,13 @@
 			?>
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			<?php 
-			foreach ($daftar_hari as $panel){?>
+			foreach ($daftar_hari as $panel){
+				$b=8;
+				if($panel=='Jumat'){
+					$b=6;
+				}
+			?>
+			
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="heading<?php echo $panel;?>">
 					<h4 class="panel-title">
@@ -47,7 +53,7 @@
 								</thead>
 								<tbody>
 								<?php 
-									for ($i=1;$i<=8;$i++){ ?>
+									for ($i=1;$i<=$b;$i++){ ?>
 									<tr>
 										<td><?php echo $i;?></td>
 										<?php 
@@ -81,7 +87,7 @@
 								</thead>
 								<tbody>
 								<?php 
-									for ($i=1;$i<=8;$i++){ ?>
+									for ($i=1;$i<=$b;$i++){ ?>
 									<tr>
 										<td><?php echo $i;?></td>
 										<?php 
@@ -115,7 +121,7 @@
 								</thead>
 								<tbody>
 								<?php 
-									for ($i=1;$i<=8;$i++){ ?>
+									for ($i=1;$i<=$b;$i++){ ?>
 									<tr>
 										<td><?php echo $i;?></td>
 										<?php 

@@ -156,6 +156,15 @@
 							<!-- /.navbar-sidebar-lv2 -->
 							
                         </li>
+                        <?php 
+							if ($this->session->userdata('level')=='admin'){?>
+						<li>
+							<a href="<?php echo base_url('jadwal/paket')?>"><i class="fa fa-unlock-alt fa-fw"></i> Paket Pelajaran</a>
+						</li>
+						<li>
+							<a href="<?php echo base_url('jadwal/tahunajaran')?>"><i class="fa fa-unlock-alt fa-fw"></i> Tahun Ajaran</a>
+						</li>
+						<?php }?>
                        <li>
 							<a href="<?php echo base_url('Akun/editPassword')?>"><i class="fa fa-unlock-alt fa-fw"></i> Ganti password</a>
 						</li>

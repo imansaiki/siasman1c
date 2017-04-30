@@ -15,6 +15,9 @@ class Kelas extends CI_Controller{
 	}
 	function index(){
 		$this->load->view('head');
+		$this->load->model('nilaiM');
+		$data=$this->nilaiM->getNilaiCek($this->semTA->semester,$this->semTA->tahun_ajar);
+	echo $data;
 		$this->load->view('foot');
 	}
 	function naikKelas(){

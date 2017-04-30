@@ -6,4 +6,14 @@ class TahunAjaranM extends CI_Model{
 		$query=$this->db->get();
 		return $query->row();
 	}
+	function updateSemester($id,$semester,$tahun){
+		$this->db->flush_cache();
+		$data=array (
+				'semester'=>$semester,
+				'tahun_ajar'=>$tahun
+		);
+		$this->db->where('id',$id);
+		//execute query
+		$query = $this->db->update('tahunajaran',$data);
+	}
 }

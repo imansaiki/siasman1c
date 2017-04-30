@@ -22,6 +22,7 @@ class nilaiM extends CI_Model{
 		return $query->result();
 	}
 	function getNilaiSiswa($nis){
+		$this->db->flush_cache();
 		$this->db->start_cache();
 		$this->db->from('nilai');
 		$this->db->join('matapelajaran','matapelajaran.id_pelajaran=nilai.id_pelajaran');
@@ -95,6 +96,15 @@ class nilaiM extends CI_Model{
 	}
 	function updateNilai($data){
 		foreach ($data as $row){
+			if (empty($row['harian'])){
+				$row['harian']=NULL;
+			};
+			if (empty($row['uts'])){
+				$row['uts']=NULL;
+			};
+			if (empty($row['uas'])){
+				$row['harian']=NULL;
+			};
 			$this->db->flush_cache();
 			$this->db->replace('nilai',$row);
 			$query=$this->db->error();
@@ -168,5 +178,25 @@ class nilaiM extends CI_Model{
 				$this->db->insert_batch('nilai',$paket);
 				break;
 		}
+	}
+	function getNilaiCek($semester,$tahun){
+		$this->db->flush_cache();
+		$this->db->from('nilai');
+		$this->db->where('semester',$semester);
+		$this->db->where('tahun_ajaran',$tahun);
+		$cek = $this->db->get();
+		$cek=$cek->result_array();
+		if(empty($cek)){
+			return 9999;
+		}else{
+				$this->db->flush_cache();
+				$where = "harian IS NULL OR uts IS NULL OR uas IS NULL";
+				$this->db->where($where);
+				$this->db->where('semester',$semester);
+				$this->db->where('tahun_ajaran',$tahun);
+				$num = $this->db->count_all_results('nilai');
+				return $num;
+		}
+	
 	}
 }

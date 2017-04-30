@@ -94,10 +94,6 @@ class Nilai extends CI_Controller{
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, nilai tidak boleh lebih dari 100</div>');
 					redirect(base_url('nilai/tambahnilai/'.$uri3.'/'.$uri4));
 					break;
-				}elseif ($harian[$key]==null or $uts[$key]==null or $uas[$key]==null){
-					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"><b>Terjadi kesalahan</b>, nilai tidak boleh kosong</div>');
-					redirect(base_url('nilai/tambahnilai/'.$uri3.'/'.$uri4));
-					break;
 				}
 				$data[] = array(
 						'nis' => $n,

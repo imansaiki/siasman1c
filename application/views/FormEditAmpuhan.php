@@ -7,14 +7,24 @@
 					<h1 class="page-header">Edit Ampuhan</h1>
 				</div>
 			</div>
+			<div id="message" >
+				<span>
 			<?php 
 				if($this->session->flashdata('message')){
 					echo $this->session->flashdata('message');
 				}
 				$i=0;
 			?>
-			<h4>Nama :<?php echo $data_guru->nama;?></h4>
-			<h4>NIP :<?php echo $data_guru->nip;?></h4>
+				</span>
+			</div>
+			<div class="row">
+				<div class="col-md-1"><strong>Nama</div>
+				<div class="col-md-2">: <?php echo $data_guru->nama;?></div></strong>
+			</div>
+			<div class="row">
+				<div class="col-md-1"><strong>NIP</div>
+				<div class="col-md-2">: <?php echo $data_guru->nip;?></div></strong>
+			</div>
 			
 			<table class="table">
 				<thead>
@@ -29,15 +39,15 @@
 				<?php 
 				foreach ($data_ampuhan as $key=>$row){?>
 					<tr>
-						<?php $i=$key+2;?>
-						<td><?php echo $key+1;?></td>
+						
+						<td class="nomer"></td>
 						<td><?php echo $row->kode_guru;?></td>
 						<td><?php echo $row->nama_pelajaran;?></td>
-						<td><button formmethod="post" formaction="<?php echo base_url('guru/deleteampuhan');?>" name="kode" value="<?php echo $row->kode_guru;?>">Hapus</button></td>
+						<td><button type="button" class="btn btn-danger delete"   data-kode="<?php echo $row->kode_guru;?>">Hapus</button></td>
 					</tr>
 				<?php }?>
 					<tr>
-						<td><?php echo $i ;?></td>
+						<td class="nomer"></td>
 						<td><input class="form-control" type="text" name="kodeguru"></td>
 						<td>
 							<select class="form-control" name="mapel">
@@ -52,7 +62,7 @@
 						</td>
 						<input type="hidden" name="submit" value="submit">
 						<input type="hidden" name="nip" value="<?php echo $data_guru->nip;?>">
-						<td><button formmethod="post" formaction="<?php echo base_url('guru/editampuhan/'.$data_guru->nip)?>"> Tambah </button></td>
+						<td><button class="btn btn-primary" formmethod="post" formaction="<?php echo base_url('guru/editampuhan/'.$data_guru->nip)?>"> Tambah </button></td>
 					</tr>
 				</form>
 				</tbody>
@@ -60,3 +70,29 @@
 		</div>
 	</div>
 </body>
+<script>
+function nomer(){
+	var num=0;
+	$('tr').each(function(){
+		$('.nomer',this).text(num);
+		num+=1;
+	});
+}
+$(document).ready(function(){
+	nomer();
+	$('.delete').click(function(){
+		var kode = $(this).data('kode');
+		var row = $(this).closest('tr');
+		$.ajax({
+	    	  url: "<?php echo base_url('guru/deleteampuhan')?>",
+	    	  method: "POST",
+	    	  data: { kode : kode },
+	    	  success: function( result ) {
+	    		  $('span','#message').html(result);
+	    		  row.remove();
+	    		  nomer();
+	    	  }
+	    	});
+	});
+});
+</script>

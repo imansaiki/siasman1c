@@ -54,5 +54,18 @@ class KelasM extends CI_Model{
 		);
 		return $data;
 	}
+	function getKelasCek($tahun){
+		$this->db->flush_cache();
+		$this->db->where('tahun_ajaran',$tahun);
+		$num1 = $this->db->count_all_results('kelas');
+		$this->db->flush_cache();
+		$this->db->where('tahun_ajaran',$tahun+1);
+		$num2 = $this->db->count_all_results('kelas');
+		
+		$num=$num1-$num2;
+		return $num;
+		
+		
+	}
 
 }

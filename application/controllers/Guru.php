@@ -24,11 +24,10 @@ class Guru extends CI_Controller {
 	}
 	function deleteAmpuhan(){
 		$kode=$this->input->post('kode');
-		$url=$this->input->post('url');
 		$this->load->model('ampuhanM');
 		$this->ampuhanM->deleteAmpuhan($kode);
-		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"></div>');
-		redirect($url);
+		$return = '<div class="alert alert-success" role="alert">'.$kode.' Berhasil Dihapus</div>';
+		echo $return;
 		
 	}
 	function deleteGuru(){
