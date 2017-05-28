@@ -52,7 +52,7 @@ class SiswaM extends CI_Model{
 		$this->db->delete('nilai');
 		
 		$this->db->flush_cache();
-		$this->db->where('nis',$nis);
+		$this->db->where('id',$nis);
 		$this->db->delete('akun');
 	}
 	function editSiswa($data){

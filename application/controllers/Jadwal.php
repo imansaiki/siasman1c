@@ -100,7 +100,12 @@ class Jadwal extends CI_Controller{
 	function editJadwal(){
 		
 		$data=$this->daftarkelasM->getDaftarKelas();
-		$data['kode_guru']=$this->ampuhanM->getAllKodeGuru();
+		$kodeguru=$this->ampuhanM->getAllKodeGuru();
+		$data['kode_guru']='<option></option>';
+		foreach ($kodeguru as $row){
+			$data['kode_guru'].='<option value="'.$row->kode_guru.'">'.$row->kode_guru.'</option>';
+		}
+		
 		$data['daftar_hari']=array('Senin','Selasa','Rabu','Kamis','Jumat');
 		$this->load->view('head');
 		$this->load->view('EditJadwal',$data);
@@ -150,9 +155,33 @@ class Jadwal extends CI_Controller{
 		$kelas=$this->input->post('kelas');
 		$kode=$this->input->post('kode');
 		$hari=$this->input->post('hari');
-		$result=$this->jadwalM->updateJadwal($jam,$hari,$kelas,$kode);
-	
-		echo $result;
+		$nip=$this->ampuhanM->getNIPguru($kode);
+		if (empty($kode)){
+			$this->jadwalM->deleteJadwal($kelas,$hari,$jam);
+			$hasil='<div class="alert alert-success" role="alert"><strong>Jadwal Berhasil Dihapus</strong></div>';
+			echo $hasil;
+		}else {
+			$cek=$this->jadwalM->cekJadwalGuru($nip->nip,$hari,$jam);
+			if (!empty($cek)){
+				$nabrak='<div class="alert alert-danger" role="alert"><strong>Terdapat Jadwal Guru('.$nip->nip.') Berbenturan Pada :</strong><br>';
+				foreach ($cek as $row){
+					$nabrak.=$row->kode_guru.' Di Kelas '.$row->nama_kelas.'<br>';
+				}
+				$nabrak.='</div>';
+				exit($nabrak);
+			}
+			$id=$this->ampuhanM->getIDMapel($kode);
+			$mapel=$this->ampuhanM->getNamaMapel($kode);
+			$id=$id->id_pelajaran;
+			$jadwal=$this->jadwalM->countJadwalKelas($kelas,$id);
+			$paket=$this->jadwalM->countJadwalPaket($id);
+			if ($jadwal>=$paket){
+				$lebih='<div class="alert alert-danger" role="alert"><strong>Tidak dapat menambah jam untuk Mata pelajaran '.$mapel->nama_pelajaran.' pada kelas '.$kelas.' karena melebihi kumulatif jam : '.$paket.'</strong><br>';
+				exit($lebih);
+			}
+			$result=$this->jadwalM->updateJadwal($jam,$hari,$kelas,$kode);
+			echo '<div class="alert alert-success" role="alert"><strong>Jadwal Berhasil Ditambahkan</strong></div>';
+		}
 	}
 	function refreshJadwal(){
 		$data=$this->jadwalM->refreshJadwal();

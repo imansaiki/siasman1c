@@ -7,12 +7,15 @@
 					<h1 class="page-header" >Edit Jadwal Pelajaran</h1>
 				</div>
 			</div>
+			<div id="message">
+				<span></span>
 			<?php 
 				$message=$this->session->flashdata('message');
 				if (!empty($message)){
 					echo $message;
 				}
 			?>
+			</div>
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			<?php 
 			foreach ($daftar_hari as $panel){
@@ -60,11 +63,10 @@
 										foreach ($satu as $key=>$n){?>
 										<td>
 											<select class="form-control" id="<?php echo $i.$panel.$n->nama_kelas;?>" data-jam="<?php echo $i;?>" data-kelas="<?php echo $n->nama_kelas;;?>" data-hari="<?php echo $panel;?>">
-												<option value=""></option>
-											<?php 
-											foreach ($kode_guru as $key=>$n){?>
-												<option value="<?php echo $n->kode_guru; ?>"><?php echo $n->kode_guru; ?></option>
-											<?php }?>
+												
+											<?php
+											echo $kode_guru;
+											?>
 											</select>
 										</td>
 										<?php }?>
@@ -94,11 +96,10 @@
 										foreach ($dua as $key=>$n){?>
 										<td>
 											<select class="form-control" id="<?php echo $i.$panel.$n->nama_kelas;?>" data-jam="<?php echo $i;?>" data-kelas="<?php echo $n->nama_kelas;?>" data-hari="<?php echo $panel;?>">
-												<option value=""></option>
-											<?php 
-											foreach ($kode_guru as $key=>$n){?>
-												<option value="<?php echo $n->kode_guru; ?>"><?php echo $n->kode_guru; ?></option>
-											<?php }?>
+												
+											<?php
+											echo $kode_guru;
+											?>
 											</select>
 										</td>
 										<?php }?>
@@ -128,11 +129,10 @@
 										foreach ($tiga as $key=>$n){?>
 										<td>
 											<select class="form-control" id="<?php echo $i.$panel.$n->nama_kelas;?>" data-jam="<?php echo $i;?>" data-kelas="<?php echo $n->nama_kelas;?>" data-hari="<?php echo $panel;?>">
-												<option value=""></option>
-											<?php 
-											foreach ($kode_guru as $key=>$n){?>
-												<option value="<?php echo $n->kode_guru; ?>"><?php echo $n->kode_guru; ?></option>
-											<?php }?>
+												
+											<?php
+											echo $kode_guru;
+											?>
 											</select>
 										</td>
 										<?php }?>
@@ -175,6 +175,11 @@ $(document).ready(function(){
 
 	initJadwal();
 	$( "select" ).change(function() {
+		$('select').attr('disabled', true);
+		var bomb = setTimeout(function(){
+			 $('select').attr('disabled',false);
+			 alert('Terjadi kesalahan, Coba Beberapa saat lagi atau hubungi admin');
+		}, 3000);
 		var kelas= $(this).data("kelas");
 		var jam= $(this).data("jam");
 		var hari= $(this).data("hari");
@@ -185,6 +190,10 @@ $(document).ready(function(){
 	    	  data: { kelas: kelas, jam: jam, hari: hari,kode: kode },
 	    	  success: function( result ) {
 	    		  initJadwal();
+	    		  $("span","#message").html(result);
+	    		  $('select').attr('disabled', false);
+	    		  clearTimeout(bomb);
+	    		  
 	    	  }
 	    	});
 		});

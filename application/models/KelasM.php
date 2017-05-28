@@ -13,6 +13,15 @@ class KelasM extends CI_Model{
 			return $query;
 		}
 	}
+	function cekKelasDepan($nis,$tahun){
+		$this->db->flush_cache();
+		$this->db->from('kelas');
+		$this->db->where('nis',$nis);
+		$this->db->where('tahun_ajaran',$tahun);
+		//execute query
+		$query = $this->db->get();
+		return $query->row();
+	}
 	function getDaftarSiswa($kelas,$thajar){
 		$this->db->flush_cache();
 		$this->db->from('kelas');

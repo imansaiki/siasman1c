@@ -9,6 +9,11 @@ class nilaiM extends CI_Model{
 			return $query;
 		}
 	}
+	function resetNilai($nis,$tahun){
+		$this->db->flush_cache();
+		$this->db->where('tahun_ajaran',$tahun);
+		$this->db->delete('nilai');
+	}
 	function getNilaiKelas($mapel,$kelas,$semester,$thajar){
 		$this->db->flush_cache();
 		$this->db->from('nilai');
@@ -132,12 +137,11 @@ class nilaiM extends CI_Model{
 	function nilaiPaket($nis,$tingkat,$jurusan,$semester,$tahun){
 		switch ($semester){
 			case '1':
-				$this->db->start_cache();
+				$this->db->flush_cache();
 				$this->db->from('paket');
 				$this->db->where('tingkat',$tingkat);
 				$this->db->where('jurusan',$jurusan);
 				$query=$this->db->get();
-				$this->db->stop_cache();
 				$query=$query->result();
 				foreach ($query as $row){
 					$paket[]=array(
@@ -156,15 +160,17 @@ class nilaiM extends CI_Model{
 					);
 				}
 				$this->db->flush_cache();
-				$this->db->insert_batch('nilai',$paket);
+				if (!empty($paket)){
+					$this->db->insert_batch('nilai',$paket);
+				}
+				
 				break;
 			case '2':
-				$this->db->start_cache();
+				$this->db->flush_cache();
 				$this->db->from('paket');
 				$this->db->where('tingkat',$tingkat);
 				$this->db->where('jurusan',$jurusan);
 				$query=$this->db->get();
-				$this->db->stop_cache();
 				$test=$query->result();
 				foreach ($test as $row){
 					$paket[]=array(
@@ -175,7 +181,9 @@ class nilaiM extends CI_Model{
 					);
 				}
 				$this->db->flush_cache();
-				$this->db->insert_batch('nilai',$paket);
+				if (!empty($paket)){
+					$this->db->insert_batch('nilai',$paket);
+				}
 				break;
 		}
 	}
@@ -187,7 +195,7 @@ class nilaiM extends CI_Model{
 		$cek = $this->db->get();
 		$cek=$cek->result_array();
 		if(empty($cek)){
-			return 9999;
+			return 0;
 		}else{
 				$this->db->flush_cache();
 				$where = "harian IS NULL OR uts IS NULL OR uas IS NULL";

@@ -12,7 +12,12 @@
 					echo $message;
 				}
 			?>
+			<?php if ($this->session->userdata('level')=='admin'){?>
+				<?php if ($this->semTA->semester=='2'){?>
+			<a href="<?php echo base_url('kelas/naikkelas');?>">Kenaikan Kelas</a><br>
+				<?php }?>
 			<a href="<?php echo base_url('siswa/tambahsiswa');?>">Tambah Siswa</a><br>
+			<?php }?>
 			<a href="<?php echo base_url('siswa/daftarsiswa');?>">Data Siswa</a><br>
 		</div>
 	</div>

@@ -16,12 +16,20 @@ class AmpuhanM extends CI_Model{
 		$this->db->from('ampuhan');
 		$this->db->join('matapelajaran', 'matapelajaran.id_pelajaran = ampuhan.id_pelajaran');
 		$this->db->where('kode_guru',$data);
-		$this->db->select('matapelajaran.nama_pelajaran');
 		$query=$this->db->get();
 		return $query->row();
 	}
 	function getIDMapel($kodeguru){
 		$this->db->flush_cache();
+		$this->db->select('id_pelajaran');
+		$this->db->from('ampuhan');
+		$this->db->where('kode_guru',$kodeguru);
+		$query=$this->db->get();
+		return $query->row();
+	}
+	function getNIPGuru($kodeguru){
+		$this->db->flush_cache();
+		$this->db->select('nip');
 		$this->db->from('ampuhan');
 		$this->db->where('kode_guru',$kodeguru);
 		$query=$this->db->get();

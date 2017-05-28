@@ -36,6 +36,9 @@ class Nilai extends CI_Controller{
 						if (empty($data)){
 							redirect(base_url('nilai/tambahnilai'));
 						}else {
+							$data['nis']=$nis;
+							$this->load->model('siswaM');
+							$data['data_siswa']=$this->siswaM->getDataSiswa($nis);
 							$this->load->view('head');
 							$this->load->view('FormTambahNilaiSiswa',$data);
 							$this->load->view('foot');
@@ -62,6 +65,7 @@ class Nilai extends CI_Controller{
 						if ($ampuh==1){
 			
 							$mapel=$this->ampuhanM->getIDMapel($kodeguru);
+							$data['nama_mapel']=$this->ampuhanM->getNamaMapel($kodeguru);
 							$data['nilai_kelas']=$this->nilaiM->getNilaiKelas($mapel->id_pelajaran,$kelas,$this->semTA->semester,$this->semTA->tahun_ajar);
 							$this->load->view('head');
 							$this->load->view('FormTambahNilai',$data);
@@ -142,6 +146,8 @@ class Nilai extends CI_Controller{
 						redirect(base_url('siswa/daftarsiswa'));
 					}else {
 						$data['nis']=$nis;
+						$this->load->model('siswaM');
+						$data['data_siswa']=$this->siswaM->getDataSiswa($nis);
 						$this->load->view('head');
 						$this->load->view('NilaiSiswa',$data);
 						$this->load->view('foot');
@@ -152,9 +158,35 @@ class Nilai extends CI_Controller{
 				$nis=$this->session->userdata('id');
 				$data=$this->nilaiM->getNilaiSiswa($nis);
 				$data['nis']=$nis;
+				$this->load->model('siswaM');
+				$data['data_siswa']=$this->siswaM->getDataSiswa($nis);
 				$this->load->view('head');
 				$this->load->view('NilaiSiswa',$data);
 				$this->load->view('foot');
 		}
+	}
+	function cetaknilai() {
+		// As PDF creation takes a bit of memory, we're saving the created file in /downloads/reports/
+		$nis=$this->uri->segment(3);
+		$kelas=$this->uri->segment(4);
+		if ($this->session->userdata('level')=='siswa' && $this->session->userdata('id')!=$nis){
+			exit();
+		}
+		$filename = $nis.$kelas.'.pdf';
+	
+		$data = $this->nilaiM->getNilaiSiswa($nis); // pass data to the view
+		$data['nilai']=$data[$kelas];
+		ini_set('memory_limit','32M'); // boost the memory limit if it's low ;)
+		$html = $this->load->view('NilaiCetak', $data, true); // render the view into HTML
+		$kop = $this->load->view('KopSurat','', true); // render the view into HTML
+		$this->load->library('pdf');
+		$pdf = $this->pdf->load();
+		$pdf = new mPDF('', 'A4');
+		$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date(DATE_RFC822)); // Add a footer for good measure ;)
+		$pdf->WriteHTML($kop); // write the HTML into the PDF
+		$pdf->WriteHTML($html); // write the HTML into the PDF
+		
+		$pdf->Output($filename, 'D'); // save to file because we can
+		echo 'done';
 	}
 }

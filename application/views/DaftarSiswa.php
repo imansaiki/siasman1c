@@ -5,7 +5,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="page-header">Daftar Siswa <?php echo $kelas ;?></h1>
+					<h1 class="page-header">Daftar Siswa <?php echo $kelas ;?> <?php if (isset($tahun)){echo $tahun;}?></h1>
 				</div>
 			</div>
 			<?php 
@@ -40,8 +40,8 @@
 							<a href="<?php echo base_url('nilai/lihatnilai/'.$nis)?>"><button type="button" class="btn btn-info" >Nilai</button></a>
 							<?php 
 							}if(($this->session->userdata('level')=='admin')){?>
-							<button class="btn btn-danger" formaction="<?php echo base_url('siswa/deletesiswa');?>" formmethod="post" name="nis" value="<?php echo $nis;?>" onclick="alert('Apakah anda yakin ingin menghapus data? Semua data nilai dan kelas juga akan dihapus')">Delete</button>
-							<button class="btn btn-warning" formaction="<?php echo base_url('akun/resetpassword');?>" formmethod="post" name="id" value="<?php echo $nis;?>" >Reset Password</button>
+							<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-nis="<?php echo $row->nis; ?>" data-nama="<?php echo $row->nama; ?>">Delete</button>
+									<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#resetModal" data-nis="<?php echo $row->nis; ?>" data-nama="<?php echo $row->nama; ?>">Reset Password</button>
 							<?php 
 							}?>
 						</td>
@@ -54,7 +54,58 @@
 			</form>
 		</div>
 	</div>
+</body>
 <!-- /.Tabel akun -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Hapus Data</h4>
+      </div>
+      <div class="modal-body">
+      Apakah anda yakin ingin menghapus data <span class="nama"></span>(<span class="nis"></span>) ?
+      Semua data yang berhubungan dengan akun yang bersangkutan juga akan dihapus 
+      </div>
+      <div class="modal-footer">
+      <form action="<?php echo base_url('siswa/deletesiswa'); ?>" method="post">
+      	<input type="hidden" class="nis" name="nis"/>
+      	<input type="hidden" name="url" value="<?php echo current_url();?>"/>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-danger">Hapus Data</button>
+       </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.Modal -->
+<!-- Modal -->
+<div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+      </div>
+      <div class="modal-body">
+      Apakah anda yakin ingin mereset password ?
+      Password yang direset akan disamakan dengan NIP. Segera ganti password untuk keamanan akun!  
+      </div>
+      <div class="modal-footer">
+      <form action="<?php echo base_url('akun/resetpassword'); ?>" method="post">
+      	<input type="hidden" class="nis" name="id"/>
+      	<input type="hidden" name="url" value="<?php echo current_url();?>"/>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-warning">Reset Password</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.Modal -->
 <!-- jQuery -->
 
 
@@ -67,7 +118,28 @@ $(document).ready( function () {
 		"searching": false,
 		"lengthChange": false
 	});
+	$('#deleteModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget) // Button that triggered the modal
+		  var nip = button.data('nis') // Extract info from data-* attributes
+		  var nama = button.data('nama') 
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		  var modal = $(this)
+		  modal.find('.nama').text(nama)
+		  modal.find('.nis').text(nip)
+		  modal.find('input','.nis').val(nip)
+		})
+	$('#resetModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget) // Button that triggered the modal
+		  var nip = button.data('nis') // Extract info from data-* attributes
+		  var nama = button.data('nama') 
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		  var modal = $(this)
+		  modal.find('.nama').text(nama)
+		  modal.find('.nis').text(nip)
+		  modal.find('input','.nis').val(nip)
+		})
 } );
 </script>
 
-</body>

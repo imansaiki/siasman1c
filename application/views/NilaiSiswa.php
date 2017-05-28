@@ -11,6 +11,18 @@
 					echo $this->session->flashdata('message');
 				}
 			?>
+			<div class="form-group">
+				<p class="col-md-1">Nama</p>
+				<p class="col-md-11">: <?php echo $data_siswa->nama;?></p>	
+			</div>
+			<div class="form-group">
+				<p class="col-md-1">NIS</p>
+				<p class="col-md-11">: <?php echo $data_siswa->nis;?></p>	
+			</div>
+			<div class="form-group">
+				<p class="col-md-1">Jenis Kelamin</p>
+				<p class="col-md-11">: <?php echo $data_siswa->kelamin;?></p>	
+			</div>
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#1">X</a></li>
     			<li><a data-toggle="tab" href="#2">XI</a></li>
@@ -27,7 +39,8 @@
 						</select>
 					</div>
 			</div>
-				<table class="table" id="X1">
+			<div id="X1">
+				<table class="table" >
 					<thead>
 						<tr>
 							<th>Mata Pelajaran</th>
@@ -40,6 +53,7 @@
 					</thead>
 					<tbody>
 					<?php if (isset($X_1)){
+						echo '<a href="'.base_url('nilai/cetaknilai/'.$nis.'/X_1').'"><button type="button" class="btn btn-primary">Cetak Nilai</button></a>';
 					foreach ($X_1 as $key=>$n){
 					?>
 						<tr>
@@ -53,8 +67,9 @@
 					<?php }} ?>
 					</tbody>
 				</table>
-				
-				<table class="table" id="X2" style="display: none">
+			</div>
+			<div id="X2" style="display: none">
+				<table class="table" >
 					<thead>
 						<tr>
 							<th>Mata Pelajaran</th>
@@ -67,6 +82,7 @@
 					</thead>
 					<tbody>
 					<?php if (isset($X_2)){
+						echo '<a href="'.base_url('nilai/cetaknilai/'.$nis.'/X_2').'"><button type="button" class="btn btn-primary">Cetak Nilai</button></a>';
 					foreach ($X_2 as $key=>$n){
 					?>
 						<tr>
@@ -81,6 +97,7 @@
 					</tbody>
 				</table>
 			</div>
+			</div>
 			<div id="2" class="tab-pane fade">
 				<div class="form-group">
 				<label class="control-label col-md-1" for="semestertk2">Semester</label>
@@ -91,7 +108,8 @@
 						</select>
 					</div>
 			</div>
-				<table class="table" id="XI1">
+			<div id="XI1">
+				<table class="table" >
 					<thead>
 						<tr>
 							<th>Mata Pelajaran</th>
@@ -104,6 +122,7 @@
 					</thead>
 					<tbody>
 					<?php if (isset($XI_1)){
+						echo '<a href="'.base_url('nilai/cetaknilai/'.$nis.'/XI_1').'"><button type="button" class="btn btn-primary">Cetak Nilai</button></a>';
 					foreach ($XI_1 as $key=>$n){
 					?>
 						<tr>
@@ -117,8 +136,9 @@
 					<?php }} ?>
 					</tbody>
 				</table>
-				
-				<table class="table" id="XI2" style="display: none">
+			</div>
+			<div id="XI2" style="display: none">
+				<table class="table" >
 					<thead>
 						<tr>
 							<th>Mata Pelajaran</th>
@@ -131,6 +151,7 @@
 					</thead>
 					<tbody>
 					<?php if (isset($XI_2)){
+						echo '<a href="'.base_url('nilai/cetaknilai/'.$nis.'/XI_2').'"><button type="button" class="btn btn-primary">Cetak Nilai</button></a>';
 					foreach ($XI_2 as $key=>$n){
 					?>
 						<tr>
@@ -145,6 +166,7 @@
 					</tbody>
 				</table>
 			</div>
+			</div>
 			<div id="3" class="tab-pane fade">
 				<div class="form-group">
 				<label class="control-label col-md-1" for="semestertk3">Semester</label>
@@ -155,7 +177,8 @@
 						</select>
 					</div>
 			</div>
-				<table class="table" id="XII1">
+			<div id="XII1">
+				<table class="table" >
 					<thead>
 						<tr>
 							<th>Mata Pelajaran</th>
@@ -168,6 +191,7 @@
 					</thead>
 					<tbody>
 					<?php if (isset($XII_1)){
+						echo '<a href="'.base_url('nilai/cetaknilai/'.$nis.'/XII_1').'"><button type="button" class="btn btn-primary">Cetak Nilai</button></a>';
 					foreach ($XII_1 as $key=>$n){
 					?>
 						<tr>
@@ -181,7 +205,9 @@
 					<?php }} ?>
 					</tbody>
 				</table>
-				<table class="table" id="XII2" style="display: none">
+			</div>
+			<div id="XII2" style="display: none">
+				<table class="table" >
 					<thead>
 						<tr>
 							<th>Mata Pelajaran</th>
@@ -194,6 +220,7 @@
 					</thead>
 					<tbody>
 					<?php if (isset($XII_2)){
+						echo '<a href="'.base_url('nilai/cetaknilai/'.$nis.'/XII_2').'"><button type="button" class="btn btn-primary">Cetak Nilai</button></a>';
 					foreach ($XII_2 as $key=>$n){
 					?>
 						<tr>
@@ -207,6 +234,7 @@
 					<?php }} ?>
 					</tbody>
 				</table>
+			</div>
 			</div>
 			</div>
 			<?php 

@@ -33,13 +33,11 @@ class Guru extends CI_Controller {
 	function deleteGuru(){
 		if ($this->session->userdata('level')!='admin'){
 			redirect(base_url());
-			break;
 		}
-		$nis=$this->input->post('nip');
-		$url=$this->input->post('url');
+		$nip=$this->input->post('nip');
 		$error=$this->guruM->deleteGuru($nip);
-		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"></div>');
-		redirect($url);
+		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> AAA</div>');
+		redirect(base_url('guru/daftarguru'));
 	}
 	function dataGuru(){
 		if (empty($this->uri->segment('3'))){

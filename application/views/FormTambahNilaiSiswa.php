@@ -11,6 +11,18 @@
 					echo $this->session->flashdata('message');
 				}
 			?>
+			<div class="form-group">
+				<p class="col-md-1">Nama</p>
+				<p class="col-md-11">: <?php echo $data_siswa->nama;?></p>	
+			</div>
+			<div class="form-group">
+				<p class="col-md-1">NIS</p>
+				<p class="col-md-11">: <?php echo $data_siswa->nis;?></p>	
+			</div>
+			<div class="form-group">
+				<p class="col-md-1">Jenis Kelamin</p>
+				<p class="col-md-11">: <?php echo $data_siswa->kelamin;?></p>	
+			</div>
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#1">X</a></li>
     			<li><a data-toggle="tab" href="#2">XI</a></li>
@@ -242,7 +254,7 @@
 			</div>
 				<input type="hidden" name="submit" value="submit">
 				<input type="hidden" name="uri3" value="<?php echo $this->uri->segment('3'); ?>">
-				<button type="submit" class="form-control btn-primary">Submit</button>
+				<button type="submit" class="form-control btn-primary">Simpan</button>
 			</form>
 		</div>
 	</div>

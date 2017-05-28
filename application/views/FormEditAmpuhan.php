@@ -17,13 +17,17 @@
 			?>
 				</span>
 			</div>
-			<div class="row">
-				<div class="col-md-1"><strong>Nama</div>
-				<div class="col-md-2">: <?php echo $data_guru->nama;?></div></strong>
+			<div class="form-group">
+				<p class="col-md-1">Nama</p>
+				<p class="col-md-11">: <?php echo $data_guru->nama;?></p>	
 			</div>
-			<div class="row">
-				<div class="col-md-1"><strong>NIP</div>
-				<div class="col-md-2">: <?php echo $data_guru->nip;?></div></strong>
+			<div class="form-group">
+				<p class="col-md-1">NIP</p>
+				<p class="col-md-11">: <?php echo $data_guru->nip;?></p>	
+			</div>
+			<div class="form-group">
+				<p class="col-md-1">Jenis Kelamin</p>
+				<p class="col-md-11">: <?php echo $data_guru->kelamin;?></p>	
 			</div>
 			
 			<table class="table">

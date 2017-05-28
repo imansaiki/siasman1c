@@ -132,7 +132,7 @@
 				<div class="form-group">
 					<div class="col-md-2">
 						<input type="hidden" name="submit" value="submit" class="form-control">
-						<input type="submit" value="kirim" class="form-control btn-primary">
+						<input type="submit" value="Simpan" class="form-control btn-primary">
 					</div>
 				</div>
 			</form>
